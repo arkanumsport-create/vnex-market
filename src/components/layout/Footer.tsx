@@ -3,7 +3,7 @@
 import React from "react";
 import { MapPin, PhoneCall, Instagram, CreditCard, ShieldCheck } from "lucide-react";
 import { useStore } from "@/stores/useStore";
-import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
+import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 
 export function Footer() {
   const { locale } = useStore();
@@ -17,7 +17,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
-                src="/logo/vnex-logo.jpg"
+                src={assetUrl("/logo/vnex-logo.jpg")}
                 alt="VNex Market"
                 className="w-14 h-14 rounded-full object-cover border-2 border-blue-500"
               />

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Product } from "@/types/store";
 import { useStore } from "@/stores/useStore";
-import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
+import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 
 interface ProductCardProps {
   product: Product;
@@ -37,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
     : `$${unitPrice.toFixed(2)} USD`;
 
   const totalImages = product.images.length;
-  const currentImage = product.images[imageIndex] || "/logo/vnex-logo.jpg";
+  const currentImage = assetUrl(product.images[imageIndex] || "/logo/vnex-logo.jpg");
 
   const prevImage = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -16,7 +16,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/product/ProductCard";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { useStore } from "@/stores/useStore";
-import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
+import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 
 export default function HomePage() {
   const { locale, products, showVes, vesRate } = useStore();
@@ -116,7 +116,7 @@ export default function HomePage() {
               <div className="lg:col-span-5 flex justify-center">
                 <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 bg-gradient-to-tr from-blue-600 via-red-500 to-blue-400 shadow-2xl">
                   <img
-                    src="/logo/vnex-logo.jpg"
+                    src={assetUrl("/logo/vnex-logo.jpg")}
                     alt="VNex Market Official Logo"
                     className="w-full h-full rounded-full object-cover bg-slate-950"
                   />

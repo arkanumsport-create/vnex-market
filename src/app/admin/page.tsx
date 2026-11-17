@@ -12,6 +12,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useStore } from "@/stores/useStore";
+import { assetUrl } from "@/lib/config";
 import { OrderStatus, PaymentStatus, Product } from "@/types/store";
 
 export default function AdminDashboardPage() {
@@ -223,7 +224,7 @@ export default function AdminDashboardPage() {
                   className="p-3 rounded-xl border border-slate-200 flex items-center gap-3 bg-slate-50"
                 >
                   <img
-                    src={prod.images[0]}
+                    src={assetUrl(prod.images[0])}
                     alt={prod.nameEs}
                     className="w-14 h-14 rounded-lg object-cover bg-slate-900 shrink-0"
                   />

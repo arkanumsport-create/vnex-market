@@ -1,5 +1,14 @@
 import { Locale, PaymentMethodId } from "@/types/store";
 
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+export function assetUrl(path: string): string {
+  if (!path) return `${BASE_PATH}/logo/vnex-logo.jpg`;
+  if (path.startsWith("http") || path.startsWith("data:")) return path;
+  if (BASE_PATH && path.startsWith(BASE_PATH)) return path;
+  return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
 export const STORE_CONFIG = {
   name: "VNex Market",
   taglineEs: "ONLINE STORE — Moda y Estilo en Venezuela",

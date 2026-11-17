@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ShoppingBag, Globe, PhoneCall, ShieldCheck, RefreshCw } from "lucide-react";
 import { useStore } from "@/stores/useStore";
-import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
+import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 
 export function Header() {
   const { locale, setLocale, showVes, toggleShowVes, vesRate, cart, setCartOpen } = useStore();
@@ -53,7 +53,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-3 group">
           <img
-            src="/logo/vnex-logo.jpg"
+            src={assetUrl("/logo/vnex-logo.jpg")}
             alt="VNex Market Logo"
             className="w-13 h-13 rounded-full object-cover border-2 border-blue-600 shadow-sm group-hover:scale-105 transition"
           />

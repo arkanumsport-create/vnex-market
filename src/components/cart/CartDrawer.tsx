@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { X, Trash2, Plus, Minus, ShoppingBag, CheckCircle2, MessageCircle, ArrowLeft } from "lucide-react";
 import { useStore } from "@/stores/useStore";
-import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
+import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { OrderRecord, PaymentMethodId } from "@/types/store";
 
 export function CartDrawer() {
@@ -160,7 +160,7 @@ export function CartDrawer() {
                       className="flex gap-3.5 p-3 rounded-xl border border-slate-200 bg-slate-50/60"
                     >
                       <img
-                        src={item.image}
+                        src={assetUrl(item.image)}
                         alt={item.nameEs}
                         className="w-20 h-20 rounded-lg object-cover bg-slate-900 shrink-0"
                       />
