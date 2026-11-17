@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, PhoneCall, Instagram, CreditCard, ShieldCheck } from "lucide-react";
+import { MapPin, PhoneCall, Camera, CreditCard, ShieldCheck } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 
@@ -60,7 +60,7 @@ export function Footer() {
               </a>
             </div>
             <div className="flex items-center gap-2.5 text-sm">
-              <Instagram className="w-4 h-4 text-pink-400 shrink-0" />
+              <Camera className="w-4 h-4 text-pink-400 shrink-0" />
               <a
                 href={STORE_CONFIG.instagramUrl}
                 target="_blank"

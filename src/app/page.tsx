@@ -9,7 +9,7 @@ import {
   Truck,
   ShieldCheck,
   Sparkles,
-  Instagram,
+  Camera,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -247,7 +247,7 @@ export default function HomePage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-[#091b3a] font-extrabold text-xs shrink-0 hover:bg-blue-50 transition"
               >
-                <Instagram className="w-4 h-4 text-pink-600" />
+                <Camera className="w-4 h-4 text-pink-600" />
                 <span>Instagram {STORE_CONFIG.instagramHandle}</span>
               </a>
             </div>
