@@ -9,19 +9,89 @@ export function assetUrl(path: string): string {
   return `${BASE_PATH}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+export const LOOKBOOK_MODELS = [
+  {
+    id: "model-01",
+    indexLabel: "01 / 05",
+    src: "/lookbook/model-01.jpg",
+    titleEs: "PRADA MILANO RED CREST — ESTUDIO",
+    titleEn: "PRADA MILANO RED CREST — STUDIO",
+    subtitleEs: "Algodón Turco Peinado • Etiqueta y Certificado Original",
+    subtitleEn: "Combed Turkish Cotton • Original Tag & Certificate",
+  },
+  {
+    id: "model-02",
+    indexLabel: "02 / 05",
+    indexNum: 2,
+    src: "/lookbook/model-02.jpg",
+    titleEs: "CHRISTIAN DIOR 1947 PATCHES — LUXURY LOUNGE",
+    titleEn: "CHRISTIAN DIOR 1947 PATCHES — LUXURY LOUNGE",
+    subtitleEs: "Parches Bordados de Alta Precisión • Importación Turquía",
+    subtitleEn: "High-Precision Embroidered Patches • Turkish Import",
+  },
+  {
+    id: "model-03",
+    indexLabel: "03 / 05",
+    src: "/lookbook/model-03.jpg",
+    titleEs: "OFF-WHITE STREET EDITION — URBAN EDITORIAL",
+    titleEn: "OFF-WHITE STREET EDITION — URBAN EDITORIAL",
+    subtitleEs: "Estampado de Alta Densidad • 100% Nuevo con Etiqueta",
+    subtitleEn: "High-Density Print • 100% Brand New with Tags",
+  },
+  {
+    id: "model-04",
+    indexLabel: "04 / 05",
+    src: "/lookbook/model-04.jpg",
+    titleEs: "OFF-WHITE ORANGE VIBES — OUTDOOR SESSION",
+    titleEn: "OFF-WHITE ORANGE VIBES — OUTDOOR SESSION",
+    subtitleEs: "Colores Vibrantes Certificados • Corte Contemporáneo",
+    subtitleEn: "Certified Vibrant Dye • Contemporary Cut",
+  },
+  {
+    id: "model-05",
+    indexLabel: "05 / 05",
+    src: "/lookbook/model-05.jpg",
+    titleEs: "LOUIS VUITTON DRIP EDITION — MARACAY LOOKBOOK",
+    titleEn: "LOUIS VUITTON DRIP EDITION — MARACAY LOOKBOOK",
+    subtitleEs: "Calidad Premium de Exportación • Todo a $20.00 USD",
+    subtitleEn: "Export-Grade Premium Quality • Flat $20.00 USD",
+  },
+];
+
+export const LOOKBOOK_VIDEOS = [
+  {
+    id: "video-01",
+    src: "/lookbook/video-01.mp4",
+    poster: "/lookbook/model-01.jpg",
+    titleEs: "Backstage & Lookbook Oficial — Sesión I",
+    titleEn: "Official Backstage & Lookbook — Session I",
+    descEs: "Textura real, caída perfecta y detalles de fábrica turca en movimiento.",
+    descEn: "Real fabric texture, drape, and Turkish factory craftsmanship in motion.",
+  },
+  {
+    id: "video-02",
+    src: "/lookbook/video-02.mp4",
+    poster: "/lookbook/model-05.jpg",
+    titleEs: "Lookbook Streetwear Maracay — Sesión II",
+    titleEn: "Maracay Streetwear Lookbook — Session II",
+    descEs: "Prendas 100% nuevas con etiqueta original y certificado de calidad.",
+    descEn: "100% brand new garments with original factory tags and quality certificate.",
+  },
+];
+
 export const STORE_CONFIG = {
-  name: "VNex Market",
-  taglineEs: "ONLINE STORE — Moda y Estilo en Venezuela",
-  taglineEn: "ONLINE STORE — Fashion & Style in Venezuela",
+  name: "VNEX MARKET",
+  subtitleEs: "EXCLUSIVE BOUTIQUE • TURKISH LUXURY",
+  subtitleEn: "EXCLUSIVE BOUTIQUE • TURKISH LUXURY",
   whatsappNumber: "+584123776184",
   whatsappClean: "584123776184",
   whatsappDisplay: "+58 412-3776184",
   instagramUrl: "https://www.instagram.com/max642553?igsi=MXNzcHJyZWVraWN6bg==",
   instagramHandle: "@max642553",
-  locationEs: "Maracay, Estado Aragua, Venezuela",
+  locationEs: "Maracay, Edo. Aragua, Venezuela",
   locationEn: "Maracay, Aragua State, Venezuela",
   defaultPriceUsd: 20.0,
-  manualVesRate: 65.5, // Editable by Admin in /admin panel
+  manualVesRate: 65.5,
   manualVesRateSource: "BCV / Referencia Manual",
   paymentMethods: [
     {
@@ -46,9 +116,9 @@ export const STORE_CONFIG = {
     },
     {
       id: "efectivo_usd" as PaymentMethodId,
-      nameEs: "Efectivo USD (Entrega en Maracay)",
-      nameEn: "Cash USD (Maracay Pickup / Delivery)",
-      badge: "Efectivo $",
+      nameEs: "Efectivo USD (Maracay)",
+      nameEn: "Cash USD (Maracay)",
+      badge: "Efectivo USD",
       instructionsEs:
         "Pago en efectivo en dólares ($ USD) al momento de retirar o recibir tu pedido en Maracay, Estado Aragua.",
       instructionsEn:
@@ -61,23 +131,24 @@ export const DICTIONARY: Record<
   Locale,
   {
     topBarPromo: string;
-    navHome: string;
+    menuButton: string;
+    sidebarSubtitle: string;
+    sidebarHeading: string;
     navCatalog: string;
-    navTrackOrder: string;
-    navContact: string;
+    navLookbook: string;
+    navAboutTurkey: string;
     navAdmin: string;
     searchPlaceholder: string;
-    heroBadge: string;
-    heroTitle: string;
-    heroSubtitle: string;
+    heroEyebrow: string;
+    heroSlogan: string;
+    heroDescription: string;
     heroCtaPrimary: string;
     heroCtaWhatsapp: string;
-    priceUnitBanner: string;
-    categoriesTitle: string;
-    featuredTitle: string;
-    featuredSubtitle: string;
+    replayIntro: string;
+    catalogEyebrow: string;
+    catalogTitle: string;
+    catalogSubtitle: string;
     allProducts: string;
-    filterAll: string;
     addToCart: string;
     buyNowWhatsapp: string;
     outOfStock: string;
@@ -85,6 +156,14 @@ export const DICTIONARY: Record<
     sizeLabel: string;
     colorLabel: string;
     quantityLabel: string;
+    turkeyBadgeTitle: string;
+    turkeyBadgeText: string;
+    lookbookEyebrow: string;
+    lookbookTitle: string;
+    lookbookSubtitle: string;
+    aboutEyebrow: string;
+    aboutTitle: string;
+    aboutDescription: string;
     cartTitle: string;
     cartEmpty: string;
     subtotal: string;
@@ -117,42 +196,53 @@ export const DICTIONARY: Record<
   }
 > = {
   es: {
-    topBarPromo:
-      "📍 Maracay, Edo. Aragua • Camisetas Exclusivas a $20 USD • Pagos: Zelle, Pago Móvil y Efectivo USD • WhatsApp +58 412-3776184",
-    navHome: "Inicio",
-    navCatalog: "Catálogo",
-    navTrackOrder: "Rastrear Pedido",
-    navContact: "Contacto",
+    topBarPromo: "IMPORTACIÓN DIRECTA DE TURQUÍA • NUEVO CON ETIQUETA Y CERTIFICADO • ENVÍOS NACIONALES",
+    menuButton: "MENÚ",
+    sidebarSubtitle: "N° 01 • BOUTIQUE EXCLUSIVA",
+    sidebarHeading: "EXPLORAR COLECCIÓN",
+    navCatalog: "Catálogo Exclusivo",
+    navLookbook: "Fotoset & Videos",
+    navAboutTurkey: "Fábrica de Turquía / Nosotros",
     navAdmin: "Panel Admin",
-    searchPlaceholder: "Buscar camisetas, tallas o colores...",
-    heroBadge: "COLECCIÓN OFICIAL • MARACAY, ARAGUA",
-    heroTitle: "Estilo Premium al Mejor Precio: Todo a $20 USD",
-    heroSubtitle:
-      "Franelas y camisetas de alta calidad con diseños exclusivos. Compra sin registro obligatorio y coordina tu pago por Zelle, Pago Móvil o Efectivo USD.",
-    heroCtaPrimary: "Ver Catálogo ($20)",
-    heroCtaWhatsapp: "Pedir por WhatsApp",
-    priceUnitBanner: "Precio único por unidad: $20.00 USD",
-    categoriesTitle: "Categorías Destacadas",
-    featuredTitle: "Catálogo de Camisetas ($20 USD)",
-    featuredSubtitle:
-      "Selecciona tu talla y color favorito. Envíos en Maracay, Estado Aragua y toda Venezuela.",
-    allProducts: "Todos",
-    filterAll: "Todas las categorías",
-    addToCart: "Agregar al carrito",
-    buyNowWhatsapp: "Comprar ahora",
-    outOfStock: "Agotado",
-    inStock: "Disponible",
-    sizeLabel: "Talla",
-    colorLabel: "Color",
-    quantityLabel: "Cantidad",
-    cartTitle: "Tu Carrito de Compras",
-    cartEmpty: "Tu carrito está vacío. ¡Explora nuestras camisetas a $20 USD!",
+    searchPlaceholder: "Buscar franelas, marcas, tallas...",
+    heroEyebrow: "COLECCIÓN 2026 • IMPORTACIÓN DIRECTA DE TURQUÍA",
+    heroSlogan: "¡VISTE LA EXCELENCIA! ¡NO SEAS COMO LOS DEMÁS, MARCA TU PROPIO ESTILO!",
+    heroDescription:
+      "Suministro directo desde las mejores fábricas textiles de Turquía. Todas nuestras prendas son 100% nuevas, con etiqueta original y certificado de calidad internacional en Maracay, Venezuela. Precio único: $20.00 USD.",
+    heroCtaPrimary: "VER COLECCIÓN ($20)",
+    heroCtaWhatsapp: "VENTAS DIRECTAS VÍA WHATSAPP",
+    replayIntro: "Repetir Intro",
+    catalogEyebrow: "CATÁLOGO EXCLUSIVO • CALIDAD TURCA CERTIFICADA",
+    catalogTitle: "TODOS LOS PRODUCTOS",
+    catalogSubtitle:
+      "Haz clic en cualquier prenda para ampliar la fotografía en alta definición y revisar sus detalles de fábrica.",
+    allProducts: "TODOS LOS PRODUCTOS",
+    addToCart: "AÑADIR AL CARRITO",
+    buyNowWhatsapp: "COMPRAR POR WHATSAPP",
+    outOfStock: "AGOTADO",
+    inStock: "DISPONIBLE",
+    sizeLabel: "TALLA",
+    colorLabel: "COLOR",
+    quantityLabel: "CANTIDAD",
+    turkeyBadgeTitle: "ORIGEN: FÁBRICA DE TURQUÍA • NUEVO CON ETIQUETA Y CERTIFICADO",
+    turkeyBadgeText:
+      "Prenda importada directamente de fábrica en Turquía. 100% nueva con etiquetas tejidas/colgantes originales y certificado de control de calidad textil.",
+    lookbookEyebrow: "EDITORIAL OFICIAL • MARACAY, ARAGUA",
+    lookbookTitle: "FOTOSET & VIDEOS",
+    lookbookSubtitle:
+      "Sesión fotográfica y videos reales de nuestras franelas importadas de Turquía. Haz clic en cualquier foto para ampliarla.",
+    aboutEyebrow: "SOBRE NOSOTROS & GARANTÍA DE ORIGEN",
+    aboutTitle: "DIRECTO DESDE LAS FÁBRICAS DE TURQUÍA",
+    aboutDescription:
+      "En VNEX MARKET trabajamos sin intermediarios directamente con fabricantes textiles certificados en Turquía. Cada prenda que recibes en Maracay o en cualquier estado de Venezuela es 100% nueva, cuenta con su etiqueta original de fábrica y sello de calidad garantizada.",
+    cartTitle: "CARRITO DE COMPRAS",
+    cartEmpty: "Tu bolsa está vacía. Explora nuestra colección turca a $20.00 USD.",
     subtotal: "Subtotal",
-    shippingNote: "El envío se confirma con el asesor según tu zona en Maracay / Venezuela.",
-    proceedToCheckout: "Finalizar Pedido",
-    checkoutTitle: "Finalizar Compra (Sin Registro Obligatorio)",
+    shippingNote: "Retiro gratis en Maracay o envío nacional (MRW / Zoom / Tealca).",
+    proceedToCheckout: "FINALIZAR PEDIDO",
+    checkoutTitle: "DATOS DE ENTREGA (SIN REGISTRO)",
     checkoutSubtitle:
-      "Completa tus datos de entrega. Nuestro equipo de VNex Market en Maracay confirmará tu pedido de inmediato.",
+      "Completa tus datos. Confirmaremos tu pedido inmediatamente por WhatsApp (+58 412-3776184).",
     firstName: "Nombre *",
     lastName: "Apellido *",
     phone: "Teléfono / WhatsApp (+58) *",
@@ -161,81 +251,92 @@ export const DICTIONARY: Record<
     ciudad: "Ciudad *",
     direccion: "Dirección exacta *",
     referencia: "Punto de referencia",
-    comentariosOptional: "Comentarios o notas del pedido (opcional)",
-    paymentMethodLabel: "Método de Pago Manual",
+    comentariosOptional: "Notas del pedido (opcional)",
+    paymentMethodLabel: "Método de Pago",
     shippingMethodLabel: "Método de Entrega",
     shippingPickupMaracay: "Retiro Personal en Maracay, Edo. Aragua (Gratis)",
-    shippingDeliveryAragua: "Delivery en Maracay / Aragua (A confirmar)",
-    shippingNational: "Envío Nacional MRW / Zoom / Tealca (Cobro en destino)",
-    confirmOrderBtn: "Confirmar Pedido ($ USD)",
-    orderSuccessTitle: "¡Pedido Creado con Éxito!",
+    shippingDeliveryAragua: "Delivery en Maracay / Aragua (A coordinar)",
+    shippingNational: "Envío Nacional MRW / Zoom / Tealca",
+    confirmOrderBtn: "CONFIRMAR PEDIDO",
+    orderSuccessTitle: "¡ORDEN REGISTRADA CON ÉXITO!",
     orderSuccessText:
-      "Tu orden ha sido registrada con estado Pendiente de Confirmación. Envía tu comprobante o confirma por WhatsApp para coordinar el pago y la entrega.",
-    sendOrderWhatsappBtn: "Enviar Pedido por WhatsApp (+58 412-3776184)",
+      "Tu orden está lista. Presiona el botón de WhatsApp para enviar el detalle a nuestro equipo en Maracay y coordinar tu pago por Zelle, Pago Móvil o Efectivo USD.",
+    sendOrderWhatsappBtn: "ENVIAR PEDIDO POR WHATSAPP (+58 412-3776184)",
     paymentMethodsSectionTitle: "Métodos de Pago Aceptados",
     locationLabel: "Ubicación",
-    whatsappLabel: "Atención por WhatsApp",
+    whatsappLabel: "Ventas WhatsApp",
     rightsReserved: "Todos los derechos reservados. Maracay, Estado Aragua, Venezuela.",
   },
   en: {
-    topBarPromo:
-      "📍 Maracay, Aragua State • Exclusive T-Shirts at $20 USD • Payments: Zelle, Pago Móvil & Cash USD • WhatsApp +58 412-3776184",
-    navHome: "Home",
-    navCatalog: "Catalog",
-    navTrackOrder: "Track Order",
-    navContact: "Contact",
+    topBarPromo: "DIRECT TURKISH FACTORY IMPORT • BRAND NEW WITH TAGS & CERTIFICATE • NATIONWIDE SHIPPING",
+    menuButton: "MENU",
+    sidebarSubtitle: "N° 01 • EXCLUSIVE BOUTIQUE",
+    sidebarHeading: "EXPLORE COLLECTION",
+    navCatalog: "Exclusive Catalog",
+    navLookbook: "Photoset & Videos",
+    navAboutTurkey: "Turkish Factory / About Us",
     navAdmin: "Admin Panel",
-    searchPlaceholder: "Search t-shirts, sizes, or colors...",
-    heroBadge: "OFFICIAL COLLECTION • MARACAY, ARAGUA",
-    heroTitle: "Premium Streetwear Style: Every Shirt $20 USD",
-    heroSubtitle:
-      "High-quality T-shirts with exclusive graphic designs. Guest checkout with no mandatory registration — pay via Zelle, Pago Móvil, or Cash USD.",
-    heroCtaPrimary: "Browse Catalog ($20)",
-    heroCtaWhatsapp: "Order via WhatsApp",
-    priceUnitBanner: "Flat unit price: $20.00 USD",
-    categoriesTitle: "Featured Categories",
-    featuredTitle: "T-Shirt Collection ($20 USD)",
-    featuredSubtitle:
-      "Choose your size and color. Local pickup & delivery in Maracay, Aragua State, and nationwide shipping across Venezuela.",
-    allProducts: "All",
-    filterAll: "All categories",
-    addToCart: "Add to Cart",
-    buyNowWhatsapp: "Buy Now",
-    outOfStock: "Out of Stock",
-    inStock: "In Stock",
-    sizeLabel: "Size",
-    colorLabel: "Color",
-    quantityLabel: "Quantity",
-    cartTitle: "Your Shopping Cart",
-    cartEmpty: "Your cart is empty. Explore our $20 USD T-shirt collection!",
+    searchPlaceholder: "Search t-shirts, brands, sizes...",
+    heroEyebrow: "2026 COLLECTION • DIRECT IMPORT FROM TURKEY",
+    heroSlogan: "WEAR EXCELLENCE! DON'T BE LIKE THE REST, DEFINE YOUR OWN STYLE!",
+    heroDescription:
+      "Direct supply from premier textile factories in Turkey. Every garment is 100% brand new with original tags and an international quality certificate in Maracay, Venezuela. Flat price: $20.00 USD.",
+    heroCtaPrimary: "VIEW COLLECTION ($20)",
+    heroCtaWhatsapp: "DIRECT SALES VIA WHATSAPP",
+    replayIntro: "Replay Intro",
+    catalogEyebrow: "EXCLUSIVE CATALOG • CERTIFIED TURKISH QUALITY",
+    catalogTitle: "ALL PRODUCTS",
+    catalogSubtitle:
+      "Click any garment to open the high-definition detail panel and zoom in on the fabric and print.",
+    allProducts: "ALL PRODUCTS",
+    addToCart: "ADD TO BAG",
+    buyNowWhatsapp: "BUY VIA WHATSAPP",
+    outOfStock: "OUT OF STOCK",
+    inStock: "AVAILABLE",
+    sizeLabel: "SIZE",
+    colorLabel: "COLOR",
+    quantityLabel: "QUANTITY",
+    turkeyBadgeTitle: "ORIGIN: TURKISH FACTORY • BRAND NEW WITH TAGS & CERTIFICATE",
+    turkeyBadgeText:
+      "Imported directly from our partner factory in Turkey. 100% brand new with original woven/hang tags and textile quality control certification.",
+    lookbookEyebrow: "OFFICIAL EDITORIAL • MARACAY, ARAGUA",
+    lookbookTitle: "PHOTOSET & VIDEOS",
+    lookbookSubtitle:
+      "Official photoshoot and live videos of our Turkish-imported T-shirts. Click any photo to enlarge.",
+    aboutEyebrow: "ABOUT US & ORIGIN GUARANTEE",
+    aboutTitle: "DIRECT FROM TURKEY'S PREMIER FACTORIES",
+    aboutDescription:
+      "At VNEX MARKET we work directly with certified textile manufacturers in Turkey without middlemen. Every garment delivered in Maracay or across Venezuela is 100% brand new, complete with original factory tags and certified quality.",
+    cartTitle: "SHOPPING BAG",
+    cartEmpty: "Your bag is empty. Explore our $20.00 USD Turkish collection.",
     subtotal: "Subtotal",
-    shippingNote: "Delivery fee is confirmed by our manager based on your zone in Maracay / Venezuela.",
-    proceedToCheckout: "Proceed to Checkout",
-    checkoutTitle: "Guest Checkout (No Registration Required)",
+    shippingNote: "Free pickup in Maracay or nationwide shipping (MRW / Zoom / Tealca).",
+    proceedToCheckout: "PROCEED TO CHECKOUT",
+    checkoutTitle: "DELIVERY DETAILS (GUEST CHECKOUT)",
     checkoutSubtitle:
-      "Enter your delivery details. Our VNex Market team in Maracay will confirm your order right away.",
+      "Enter your details. Our team in Maracay will confirm your order via WhatsApp (+58 412-3776184).",
     firstName: "First Name *",
     lastName: "Last Name *",
     phone: "Phone / WhatsApp (+58) *",
-    emailOptional: "Email address (optional)",
-    estado: "State (Estado) *",
-    ciudad: "City (Ciudad) *",
+    emailOptional: "Email (optional)",
+    estado: "State *",
+    ciudad: "City *",
     direccion: "Street Address *",
     referencia: "Landmark / Reference",
-    comentariosOptional: "Order comments or notes (optional)",
-    paymentMethodLabel: "Manual Payment Method",
+    comentariosOptional: "Order notes (optional)",
+    paymentMethodLabel: "Payment Method",
     shippingMethodLabel: "Delivery Method",
-    shippingPickupMaracay: "Local Pickup in Maracay, Aragua State (Free)",
-    shippingDeliveryAragua: "Local Delivery in Maracay / Aragua (Confirmed by manager)",
-    shippingNational: "Nationwide Shipping MRW / Zoom / Tealca (Pay on delivery)",
-    confirmOrderBtn: "Confirm Order ($ USD)",
-    orderSuccessTitle: "Order Successfully Created!",
+    shippingPickupMaracay: "Personal Pickup in Maracay, Aragua State (Free)",
+    shippingDeliveryAragua: "Local Delivery in Maracay / Aragua",
+    shippingNational: "Nationwide Shipping MRW / Zoom / Tealca",
+    confirmOrderBtn: "CONFIRM ORDER",
+    orderSuccessTitle: "ORDER SUCCESSFULLY CREATED!",
     orderSuccessText:
-      "Your order has been registered with status Pending Confirmation. Send your order details via WhatsApp to coordinate payment and delivery.",
-    sendOrderWhatsappBtn: "Send Order on WhatsApp (+58 412-3776184)",
+      "Your order is registered. Click the WhatsApp button below to send your order details to our Maracay team and coordinate payment via Zelle, Pago Móvil, or Cash USD.",
+    sendOrderWhatsappBtn: "SEND ORDER ON WHATSAPP (+58 412-3776184)",
     paymentMethodsSectionTitle: "Accepted Payment Methods",
     locationLabel: "Location",
-    whatsappLabel: "WhatsApp Support",
+    whatsappLabel: "WhatsApp Sales",
     rightsReserved: "All rights reserved. Maracay, Aragua State, Venezuela.",
   },
 };

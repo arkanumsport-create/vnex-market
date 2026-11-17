@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Trash2, Plus, Minus, ShoppingBag, CheckCircle2, MessageCircle, ArrowLeft } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag, CheckCircle2, ArrowLeft } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { OrderRecord, PaymentMethodId } from "@/types/store";
+import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 
 export function CartDrawer() {
   const {
@@ -24,7 +25,6 @@ export function CartDrawer() {
   const [step, setStep] = useState<"cart" | "checkout" | "success">("cart");
   const [createdOrder, setCreatedOrder] = useState<OrderRecord | null>(null);
 
-  // Checkout Form State
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("+58 ");
@@ -86,7 +86,7 @@ export function CartDrawer() {
 
     const text =
       locale === "es"
-        ? `¡Hola VNex Market! He realizado el pedido *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
+        ? `¡Hola VNEX MARKET! He realizado el pedido *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
             2
           )} USD\n*Método de Pago:* ${pmLabel}\n*Cliente:* ${order.firstName} ${
             order.lastName
@@ -95,7 +95,7 @@ export function CartDrawer() {
           }\n*Dirección:* ${order.direccion}${
             order.referencia ? ` (Ref: ${order.referencia})` : ""
           }`
-        : `Hello VNex Market! I placed order *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
+        : `Hello VNEX MARKET! I placed order *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
             2
           )} USD\n*Payment Method:* ${pmLabel}\n*Customer:* ${order.firstName} ${
             order.lastName
@@ -107,21 +107,21 @@ export function CartDrawer() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/60 backdrop-blur-xs">
-      <div className="w-full max-w-lg bg-white h-full shadow-2xl flex flex-col justify-between overflow-hidden">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs">
+      <div className="w-full max-w-md bg-[#171715] text-[#f3f0e9] border-l border-white/15 h-full shadow-2xl flex flex-col justify-between overflow-hidden">
         {/* Drawer Header */}
-        <div className="p-4 sm:p-5 bg-[#091b3a] text-white flex items-center justify-between">
+        <div className="p-5 border-b border-white/12 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             {step === "checkout" && (
               <button
                 onClick={() => setStep("cart")}
-                className="p-1.5 rounded-lg hover:bg-slate-800 transition cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-white/10 transition cursor-pointer"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-4 h-4 text-[#d4af37]" />
               </button>
             )}
-            <ShoppingBag className="w-5 h-5 text-blue-400" />
-            <h2 className="text-base sm:text-lg font-extrabold">
+            <ShoppingBag className="w-4 h-4 text-[#d4af37]" />
+            <h2 className="font-serif-luxury text-lg tracking-wider">
               {step === "cart"
                 ? t.cartTitle
                 : step === "checkout"
@@ -135,69 +135,72 @@ export function CartDrawer() {
               setCartOpen(false);
               if (step === "success") setStep("cart");
             }}
-            className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-300 hover:text-white transition cursor-pointer"
+            className="w-8 h-8 rounded-full border border-white/15 hover:border-[#ff1f32] hover:bg-[#ff1f32] text-[#f3f0e9] grid place-items-center transition cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Drawer Content */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+        <div className="flex-1 overflow-y-auto p-5">
           {step === "cart" && (
             <>
               {cart.length === 0 ? (
-                <div className="text-center py-16 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
-                    <ShoppingBag className="w-8 h-8" />
+                <div className="text-center py-20 space-y-4">
+                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-[#d4af37]">
+                    <ShoppingBag className="w-7 h-7" />
                   </div>
-                  <p className="text-slate-600 font-medium text-sm">{t.cartEmpty}</p>
+                  <p className="text-[#99968e] text-xs leading-relaxed max-w-xs mx-auto">
+                    {t.cartEmpty}
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {cart.map((item) => (
                     <div
                       key={item.variantId}
-                      className="flex gap-3.5 p-3 rounded-xl border border-slate-200 bg-slate-50/60"
+                      className="flex gap-3.5 p-3 border border-white/12 bg-[#1d1d1a]"
                     >
                       <img
                         src={assetUrl(item.image)}
                         alt={item.nameEs}
-                        className="w-20 h-20 rounded-lg object-cover bg-slate-900 shrink-0"
+                        className="w-20 h-24 object-cover bg-[#201f1c] shrink-0"
                       />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-bold text-slate-900 truncate">
-                          {locale === "es" ? item.nameEs : item.nameEn}
-                        </h4>
-                        <p className="text-xs text-slate-500 mt-0.5">
-                          {t.sizeLabel}: <span className="font-bold text-slate-700">{item.size}</span>{" "}
-                          • {locale === "es" ? item.colorEs : item.colorEn}
-                        </p>
-                        <p className="text-sm font-extrabold text-[#091b3a] mt-1">
-                          ${(item.unitPriceUsd * item.quantity).toFixed(2)} USD
-                        </p>
+                      <div className="flex-1 min-w-0 flex flex-col justify-between">
+                        <div>
+                          <h4 className="font-serif-luxury text-xs text-[#f3f0e9] truncate">
+                            {locale === "es" ? item.nameEs : item.nameEn}
+                          </h4>
+                          <p className="text-[10px] text-[#99968e] mt-0.5 uppercase tracking-wider">
+                            {t.sizeLabel}: <span className="text-[#d4af37] font-bold">{item.size}</span>
+                          </p>
+                          <p className="text-xs font-bold text-[#d4af37] mt-1">
+                            ${(item.unitPriceUsd * item.quantity).toFixed(2)} USD
+                          </p>
+                        </div>
 
                         <div className="flex items-center justify-between mt-2">
-                          <div className="inline-flex items-center rounded-lg border border-slate-300 bg-white">
+                          <div className="inline-flex items-center border border-white/15 bg-[#10100f]">
                             <button
                               onClick={() => updateCartQuantity(item.variantId, item.quantity - 1)}
-                              className="p-1.5 text-slate-600 hover:text-slate-900 cursor-pointer"
+                              className="p-1.5 text-[#99968e] hover:text-white cursor-pointer"
                             >
-                              <Minus className="w-3.5 h-3.5" />
+                              <Minus className="w-3 h-3" />
                             </button>
-                            <span className="px-2.5 text-xs font-bold text-slate-900">
+                            <span className="px-2.5 text-xs font-bold text-white">
                               {item.quantity}
                             </span>
                             <button
                               onClick={() => updateCartQuantity(item.variantId, item.quantity + 1)}
-                              className="p-1.5 text-slate-600 hover:text-slate-900 cursor-pointer"
+                              className="p-1.5 text-[#99968e] hover:text-white cursor-pointer"
                             >
-                              <Plus className="w-3.5 h-3.5" />
+                              <Plus className="w-3 h-3" />
                             </button>
                           </div>
 
                           <button
                             onClick={() => removeFromCart(item.variantId)}
-                            className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition cursor-pointer"
+                            className="p-1.5 text-[#99968e] hover:text-[#ff1f32] transition cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -211,120 +214,110 @@ export function CartDrawer() {
           )}
 
           {step === "checkout" && (
-            <form id="vnex-checkout-form" onSubmit={handleCheckoutSubmit} className="space-y-4">
-              <p className="text-xs text-slate-600 bg-blue-50 border border-blue-200 rounded-xl p-3">
+            <form id="vnex-checkout-form" onSubmit={handleCheckoutSubmit} className="space-y-4 text-xs">
+              <p className="text-[11px] text-[#d4cfc4] bg-white/5 border border-[#d4af37]/30 p-3">
                 {t.checkoutSubtitle}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
                     {t.firstName}
                   </label>
                   <input
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                    placeholder="Ej. Carlos"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
                     {t.lastName}
                   </label>
                   <input
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                    placeholder="Ej. Pérez"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">{t.phone}</label>
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
+                    {t.phone}
+                  </label>
                   <input
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                    placeholder="+58 412 0000000"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
                     {t.emailOptional}
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                    placeholder="correo@ejemplo.com"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">{t.estado}</label>
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
+                    {t.estado}
+                  </label>
                   <input
                     required
                     value={estado}
                     onChange={(e) => setEstado(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">{t.ciudad}</label>
+                  <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
+                    {t.ciudad}
+                  </label>
                   <input
                     required
                     value={ciudad}
                     onChange={(e) => setCiudad(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
+                    className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">{t.direccion}</label>
+                <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
+                  {t.direccion}
+                </label>
                 <input
                   required
                   value={direccion}
                   onChange={(e) => setDireccion(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                  placeholder="Av. Las Delicias / Urb. / Calle / Casa o Edificio"
+                  className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#d4af37]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t.referencia}
-                </label>
-                <input
-                  value={referencia}
-                  onChange={(e) => setReferencia(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                  placeholder="Cerca de..."
-                />
-              </div>
-
-              {/* Payment Method */}
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-2">
+                <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-2">
                   {t.paymentMethodLabel}
                 </label>
                 <div className="space-y-2">
                   {STORE_CONFIG.paymentMethods.map((pm) => (
                     <label
                       key={pm.id}
-                      className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${
+                      className={`flex items-start gap-2.5 p-3 border cursor-pointer transition ${
                         paymentMethod === pm.id
-                          ? "border-blue-600 bg-blue-50/60"
-                          : "border-slate-200 hover:border-slate-300"
+                          ? "border-[#d4af37] bg-[#d4af37]/10"
+                          : "border-white/15 hover:border-white/30"
                       }`}
                     >
                       <input
@@ -332,13 +325,13 @@ export function CartDrawer() {
                         name="paymentMethod"
                         checked={paymentMethod === pm.id}
                         onChange={() => setPaymentMethod(pm.id)}
-                        className="mt-1"
+                        className="mt-0.5"
                       />
-                      <div className="text-xs">
-                        <span className="font-bold text-slate-900 block">
+                      <div>
+                        <span className="font-bold text-white block">
                           {locale === "es" ? pm.nameEs : pm.nameEn}
                         </span>
-                        <span className="text-slate-600 mt-0.5 block">
+                        <span className="text-[11px] text-[#99968e] mt-0.5 block">
                           {locale === "es" ? pm.instructionsEs : pm.instructionsEn}
                         </span>
                       </div>
@@ -347,9 +340,8 @@ export function CartDrawer() {
                 </div>
               </div>
 
-              {/* Shipping Method */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-2">
+                <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
                   {t.shippingMethodLabel}
                 </label>
                 <select
@@ -362,73 +354,53 @@ export function CartDrawer() {
                         | "national_venezuela"
                     )
                   }
-                  className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-semibold text-slate-800 bg-white"
+                  className="w-full bg-[#10100f] border border-white/15 px-3 py-2.5 text-xs text-white"
                 >
                   <option value="pickup_maracay">{t.shippingPickupMaracay}</option>
                   <option value="delivery_aragua">{t.shippingDeliveryAragua}</option>
                   <option value="national_venezuela">{t.shippingNational}</option>
                 </select>
               </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
-                  {t.comentariosOptional}
-                </label>
-                <textarea
-                  rows={2}
-                  value={comentarios}
-                  onChange={(e) => setComentarios(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:border-blue-600"
-                />
-              </div>
             </form>
           )}
 
           {step === "success" && createdOrder && (
-            <div className="text-center py-6 space-y-5">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-10 h-10" />
+            <div className="text-center py-8 space-y-5">
+              <div className="w-16 h-16 rounded-full bg-[#25D366]/15 border border-[#25D366] text-[#25D366] flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-9 h-9" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
-                  Orden #{createdOrder.orderNumber}
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d4af37]">
+                  ORDEN #{createdOrder.orderNumber}
                 </span>
-                <h3 className="text-xl font-extrabold text-slate-900 mt-1">
+                <h3 className="font-serif-luxury text-xl text-white mt-1">
                   {t.orderSuccessTitle}
                 </h3>
-                <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+                <p className="text-xs text-[#99968e] mt-2 leading-relaxed">
                   {t.orderSuccessText}
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-left text-xs space-y-2">
-                <div className="flex justify-between font-bold text-slate-900">
-                  <span>Total USD:</span>
+              <div className="bg-[#10100f] p-4 border border-white/12 text-left text-xs space-y-2">
+                <div className="flex justify-between font-bold text-[#d4af37]">
+                  <span>TOTAL USD:</span>
                   <span>${createdOrder.totalUsd.toFixed(2)} USD</span>
                 </div>
                 {showVes && (
-                  <div className="flex justify-between text-slate-600">
+                  <div className="flex justify-between text-[#99968e]">
                     <span>Referencia en Bs.:</span>
                     <span>Bs. {(createdOrder.totalUsd * vesRate).toFixed(2)}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-slate-600">
-                  <span>Estado del Pedido:</span>
-                  <span className="font-bold text-amber-600">Pendiente de confirmación</span>
-                </div>
-                <div className="flex justify-between text-slate-600">
-                  <span>Estado del Pago:</span>
-                  <span className="font-bold text-amber-600">Pendiente</span>
-                </div>
               </div>
 
               <a
                 href={buildWhatsappOrderUrl(createdOrder)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md transition"
+                className="w-full inline-flex items-center justify-center gap-2.5 px-5 py-3.5 bg-[#25D366] hover:bg-[#1ebe5a] text-black font-extrabold text-xs tracking-wider uppercase transition"
               >
-                <MessageCircle className="w-5 h-5" />
+                <WhatsAppIcon className="w-4 h-4" withBadge={false} />
                 <span>{t.sendOrderWhatsappBtn}</span>
               </a>
             </div>
@@ -437,26 +409,28 @@ export function CartDrawer() {
 
         {/* Drawer Footer */}
         {step !== "success" && cart.length > 0 && (
-          <div className="p-4 sm:p-5 border-t border-slate-200 bg-slate-50 space-y-3">
+          <div className="p-5 border-t border-white/12 bg-[#141412] space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-600">{t.subtotal}:</span>
+              <span className="text-xs uppercase tracking-widest text-[#99968e]">
+                {t.subtotal}:
+              </span>
               <div className="text-right">
-                <span className="text-lg font-extrabold text-[#091b3a]">
+                <span className="font-serif-luxury text-xl text-[#d4af37]">
                   ${subtotalUsd.toFixed(2)} USD
                 </span>
                 {showVes && (
-                  <span className="block text-xs text-slate-500">
+                  <span className="block text-[10px] text-[#99968e]">
                     ≈ Bs. {(subtotalUsd * vesRate).toFixed(2)}
                   </span>
                 )}
               </div>
             </div>
-            <p className="text-[11px] text-slate-500">{t.shippingNote}</p>
+            <p className="text-[10px] text-[#99968e]">{t.shippingNote}</p>
 
             {step === "cart" ? (
               <button
                 onClick={() => setStep("checkout")}
-                className="w-full py-3 rounded-xl bg-[#091b3a] hover:bg-blue-700 text-white font-extrabold text-sm shadow transition cursor-pointer"
+                className="w-full py-3.5 bg-[#d4af37] hover:bg-[#e5c247] text-[#111] font-extrabold text-xs tracking-[0.16em] uppercase transition cursor-pointer"
               >
                 {t.proceedToCheckout}
               </button>
@@ -464,7 +438,7 @@ export function CartDrawer() {
               <button
                 type="submit"
                 form="vnex-checkout-form"
-                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow transition cursor-pointer"
+                className="w-full py-3.5 bg-[#d4af37] hover:bg-[#e5c247] text-[#111] font-extrabold text-xs tracking-[0.16em] uppercase transition cursor-pointer"
               >
                 {t.confirmOrderBtn} (${totalUsd.toFixed(2)} USD)
               </button>

@@ -1,17 +1,218 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap");
 
 :root {
-  --vnex-navy: #091b3a;
-  --vnex-blue: #1d4ed8;
-  --vnex-red: #dc2626;
+  --background: #10100f;
+  --surface: #171715;
+  --surface-light: #1d1d1a;
+  --sidebar-bg: #0c1424;
+  --text: #f3f0e9;
+  --muted: #99968e;
+  --gold: #d4af37;
+  --gold-light: #f3e5ab;
+  --sky-oval: #38bdf8;
+  --sky-oval-glow: rgba(56, 189, 248, 0.28);
+  --crimson: #ff1f32;
+  --line: rgba(243, 240, 233, 0.12);
+  --serif: "Cinzel", Georgia, serif;
+  --sans: "Montserrat", system-ui, -apple-system, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--sans);
 }
 
 body {
-  background-color: #f8fafc;
-  color: #0f172a;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+.font-serif-luxury {
+  font-family: var(--serif);
+}
+
+.font-sans-luxury {
+  font-family: var(--sans);
+}
+
+/* 3D Rotating Coin Logo in Header */
+.coin-stage {
+  width: 52px;
+  height: 52px;
+  perspective: 220px;
+  flex-shrink: 0;
+}
+
+.coin-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: coin-spin 5.5s linear infinite;
+}
+
+.coin-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 2px solid #38bdf8;
+  outline: 1px solid rgba(212, 175, 55, 0.85);
+  outline-offset: -4px;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), inset 0 0 10px rgba(0, 0, 0, 0.7);
+  backface-visibility: hidden;
+  background: #091326;
+}
+
+.coin-face-back {
+  transform: rotateY(180deg);
+}
+
+/* Wordmark Display Stroke */
+.wordmark-stroke-blue {
+  font-family: var(--serif);
+  color: #38bdf8;
+  -webkit-text-stroke: 0.65px #ffffff;
+  paint-order: stroke fill;
+  text-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+}
+
+.wordmark-stroke-white {
+  font-family: var(--serif);
+  color: #ffffff;
+  -webkit-text-stroke: 0.65px #38bdf8;
+  paint-order: stroke fill;
+}
+
+/* Hero Slogan 3D Stroke Display (Reference Style) */
+.hero-slogan-display {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: #ff1f32;
+  -webkit-text-stroke: 1px #ffffff;
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 #8e1019, 0 0 24px rgba(255, 31, 50, 0.28);
+}
+
+/* Sidebar Oval Sky-Blue Pill Active State */
+.sidebar-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 13px 20px;
+  margin: 4px 0;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: #e2e8f0;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  cursor: pointer;
+}
+
+.sidebar-menu-item:hover {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.07);
+}
+
+.sidebar-menu-item.active-oval {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.28), inset 0 0 12px rgba(56, 189, 248, 0.12);
+  font-weight: 700;
+}
+
+/* Keyframes */
+@keyframes coin-spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-28px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hero-photo-zoom {
+  from {
+    opacity: 0.45;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes letter-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.85);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-drawer-left {
+  animation: drawer-in-left 0.28s ease-out both;
+}
+
+.animate-modal-rise {
+  animation: modal-rise 0.25s ease-out both;
+}
+
+.animate-hero-slide {
+  animation: hero-photo-zoom 0.85s ease-out both;
 }
