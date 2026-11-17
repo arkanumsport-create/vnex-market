@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShoppingCart, Heart, MessageCircle, Check } from "lucide-react";
+import {
+  ShoppingCart,
+  Heart,
+  MessageCircle,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Product } from "@/types/store";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG } from "@/lib/config";
@@ -17,6 +24,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const [selectedVariantId, setSelectedVariantId] = useState<string>(
     product.variants[0]?.id || ""
   );
+  const [imageIndex, setImageIndex] = useState<number>(0);
   const [addedFeedback, setAddedFeedback] = useState(false);
 
   const selectedVariant =
@@ -27,6 +35,19 @@ export function ProductCard({ product }: ProductCardProps) {
   const priceDisplay = showVes
     ? `Bs. ${(unitPrice * vesRate).toFixed(2)}`
     : `$${unitPrice.toFixed(2)} USD`;
+
+  const totalImages = product.images.length;
+  const currentImage = product.images[imageIndex] || "/logo/vnex-logo.jpg";
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setImageIndex((prev) => (prev - 1 + totalImages) % totalImages);
+  };
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setImageIndex((prev) => (prev + 1) % totalImages);
+  };
 
   const handleAddToCart = () => {
     if (!selectedVariant || selectedVariant.stock <= 0) return;
@@ -51,30 +72,33 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const whatsappDirectLink = `https://wa.me/${STORE_CONFIG.whatsappClean}?text=${encodeURIComponent(
     locale === "es"
-      ? `¡Hola VNex Market! Quiero pedir:\n• Producto: ${product.nameEs}\n• Talla: ${selectedVariant?.size}\n• Precio: $${unitPrice.toFixed(2)} USD\n• Ubicación: Maracay, Edo. Aragua`
-      : `Hello VNex Market! I want to order:\n• Product: ${product.nameEn}\n• Size: ${selectedVariant?.size}\n• Price: $${unitPrice.toFixed(2)} USD\n• Location: Maracay, Aragua`
+      ? `¡Hola VNex Market! Quiero pedir:\n• Producto: ${product.nameEs} (${product.sku})\n• Talla: ${selectedVariant?.size}\n• Precio: $${unitPrice.toFixed(2)} USD\n• Ubicación: Maracay, Edo. Aragua`
+      : `Hello VNex Market! I want to order:\n• Product: ${product.nameEn} (${product.sku})\n• Size: ${selectedVariant?.size}\n• Price: $${unitPrice.toFixed(2)} USD\n• Location: Maracay, Aragua`
   )}`;
 
   return (
     <div className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col">
-      {/* Image Header */}
+      {/* Image Header with Multi-Photo Carousel */}
       <div className="relative aspect-square bg-slate-950 overflow-hidden">
         <img
-          src={product.images[0] || "/logo/vnex-logo.jpg"}
+          src={currentImage}
           alt={locale === "es" ? product.nameEs : product.nameEn}
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+          className="w-full h-full object-cover transition duration-300"
         />
+
+        {/* Price & New Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           <span className="px-2.5 py-1 rounded-full bg-[#091b3a]/90 backdrop-blur-xs text-white text-xs font-extrabold tracking-wide shadow">
             ${unitPrice.toFixed(0)} USD
           </span>
           {product.isNew && (
-            <span className="px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider">
+            <span className="px-2.5 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider w-fit">
               {locale === "es" ? "Nuevo" : "New"}
             </span>
           )}
         </div>
 
+        {/* Favorite Button */}
         <button
           onClick={() => toggleFavorite(product.id)}
           className="absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white text-slate-700 shadow transition cursor-pointer"
@@ -84,14 +108,50 @@ export function ProductCard({ product }: ProductCardProps) {
             className={`w-4 h-4 ${isFav ? "fill-red-500 text-red-500" : "text-slate-600"}`}
           />
         </button>
+
+        {/* Carousel Navigation Arrows */}
+        {totalImages > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/55 hover:bg-black/80 text-white transition cursor-pointer"
+              aria-label="Foto anterior"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-black/55 hover:bg-black/80 text-white transition cursor-pointer"
+              aria-label="Siguiente foto"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-xs">
+              {product.images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setImageIndex(idx)}
+                  className={`h-1.5 rounded-full transition cursor-pointer ${
+                    idx === imageIndex ? "w-4 bg-white" : "w-1.5 bg-white/50"
+                  }`}
+                  aria-label={`Ver foto ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* Product Body */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600">
-            {locale === "es" ? product.categoryNameEs : product.categoryNameEn}
-          </span>
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600">
+              {locale === "es" ? product.categoryNameEs : product.categoryNameEn}
+            </span>
+            <span className="text-[10px] font-semibold text-slate-400">{product.sku}</span>
+          </div>
           <h3 className="mt-1 text-base font-bold text-slate-900 line-clamp-2">
             {locale === "es" ? product.nameEs : product.nameEn}
           </h3>
