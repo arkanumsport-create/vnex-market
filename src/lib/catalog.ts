@@ -1,0 +1,108 @@
+import { Product } from "@/types/store";
+
+export const INITIAL_PRODUCTS: Product[] = [
+  {
+    id: "prod-vnex-01",
+    sku: "VNEX-TS-001",
+    slug: "camiseta-vnex-signature-white",
+    categorySlug: "camisetas",
+    categoryNameEs: "Camisetas y Franelas",
+    categoryNameEn: "T-Shirts & Tops",
+    nameEs: "Franela VNex Signature Edition — Blanca",
+    nameEn: "VNex Signature Edition T-Shirt — White",
+    descriptionEs:
+      "Franela premium 100% algodón peinado de alto gramaje con corte moderno. Ideal para el clima de Maracay, fresca y resistente al lavado.",
+    descriptionEn:
+      "Heavyweight 100% combed cotton premium T-shirt with a modern fit. Breathable, durable, and crafted for everyday comfort.",
+    priceUsd: 20.0,
+    images: ["/logo/vnex-logo.jpg"],
+    isFeatured: true,
+    isNew: true,
+    materialEs: "100% Algodón Premium Peinado",
+    materialEn: "100% Combed Premium Cotton",
+    variants: [
+      { id: "v-001-s", sku: "VNEX-TS-001-S", size: "S", colorEs: "Blanco", colorEn: "White", colorHex: "#ffffff", stock: 12 },
+      { id: "v-001-m", sku: "VNEX-TS-001-M", size: "M", colorEs: "Blanco", colorEn: "White", colorHex: "#ffffff", stock: 18 },
+      { id: "v-001-l", sku: "VNEX-TS-001-L", size: "L", colorEs: "Blanco", colorEn: "White", colorHex: "#ffffff", stock: 15 },
+      { id: "v-001-xl", sku: "VNEX-TS-001-XL", size: "XL", colorEs: "Blanco", colorEn: "White", colorHex: "#ffffff", stock: 8 },
+    ],
+  },
+  {
+    id: "prod-vnex-02",
+    sku: "VNEX-TS-002",
+    slug: "camiseta-urbana-navy-pro",
+    categorySlug: "moda-urbana",
+    categoryNameEs: "Moda Urbana",
+    categoryNameEn: "Streetwear",
+    nameEs: "Franela Urbana Navy Pro — Azul Oscuro",
+    nameEn: "Urban Navy Pro T-Shirt — Deep Blue",
+    descriptionEs:
+      "Diseño streetwear exclusivo de nuestra colección @max642553. Estampado de alta definición y costuras reforzadas.",
+    descriptionEn:
+      "Exclusive streetwear design from our @max642553 collection. High-definition print and reinforced stitching.",
+    priceUsd: 20.0,
+    images: ["/logo/vnex-logo.jpg"],
+    isFeatured: true,
+    isNew: true,
+    materialEs: "Algodón Jersey 20/1",
+    materialEn: "20/1 Jersey Cotton",
+    variants: [
+      { id: "v-002-s", sku: "VNEX-TS-002-S", size: "S", colorEs: "Azul Marino", colorEn: "Navy Blue", colorHex: "#0f2447", stock: 10 },
+      { id: "v-002-m", sku: "VNEX-TS-002-M", size: "M", colorEs: "Azul Marino", colorEn: "Navy Blue", colorHex: "#0f2447", stock: 20 },
+      { id: "v-002-l", sku: "VNEX-TS-002-L", size: "L", colorEs: "Azul Marino", colorEn: "Navy Blue", colorHex: "#0f2447", stock: 14 },
+      { id: "v-002-xl", sku: "VNEX-TS-002-XL", size: "XL", colorEs: "Azul Marino", colorEn: "Navy Blue", colorHex: "#0f2447", stock: 6 },
+    ],
+  },
+  {
+    id: "prod-vnex-03",
+    sku: "VNEX-TS-003",
+    slug: "camiseta-graphic-black-edition",
+    categorySlug: "edicion-especial",
+    categoryNameEs: "Edición Especial",
+    categoryNameEn: "Special Edition",
+    nameEs: "Franela Graphic Black Edition — Negra",
+    nameEn: "Graphic Black Edition T-Shirt — Black",
+    descriptionEs:
+      "Camiseta negra edición especial con acabado suave al tacto y cuello acanalado indeformable. Disponible para entrega inmediata en Maracay.",
+    descriptionEn:
+      "Special edition black T-shirt with soft-touch finish and durable ribbed crew neck. Available for immediate pickup or delivery in Maracay.",
+    priceUsd: 20.0,
+    images: ["/logo/vnex-logo.jpg"],
+    isFeatured: true,
+    isNew: false,
+    materialEs: "100% Algodón Ring-Spun",
+    materialEn: "100% Ring-Spun Cotton",
+    variants: [
+      { id: "v-003-s", sku: "VNEX-TS-003-S", size: "S", colorEs: "Negro", colorEn: "Black", colorHex: "#111827", stock: 9 },
+      { id: "v-003-m", sku: "VNEX-TS-003-M", size: "M", colorEs: "Negro", colorEn: "Black", colorHex: "#111827", stock: 16 },
+      { id: "v-003-l", sku: "VNEX-TS-003-L", size: "L", colorEs: "Negro", colorEn: "Black", colorHex: "#111827", stock: 12 },
+      { id: "v-003-xl", sku: "VNEX-TS-003-XL", size: "XL", colorEs: "Negro", colorEn: "Black", colorHex: "#111827", stock: 10 },
+    ],
+  },
+  {
+    id: "prod-vnex-04",
+    sku: "VNEX-TS-004",
+    slug: "camiseta-oversize-crimson-accent",
+    categorySlug: "moda-urbana",
+    categoryNameEs: "Moda Urbana",
+    categoryNameEn: "Streetwear",
+    nameEs: "Franela Oversize Sport — Edición Aragua",
+    nameEn: "Oversize Sport T-Shirt — Aragua Edition",
+    descriptionEs:
+      "Corte relajado oversize con detalles deportivos inspirados en la identidad VNex Market. Precio único $20 USD.",
+    descriptionEn:
+      "Relaxed oversize cut with athletic details inspired by the VNex Market identity. Flat price $20 USD.",
+    priceUsd: 20.0,
+    images: ["/logo/vnex-logo.jpg"],
+    isFeatured: true,
+    isNew: true,
+    materialEs: "Algodón Pesado 240g",
+    materialEn: "Heavyweight 240g Cotton",
+    variants: [
+      { id: "v-004-s", sku: "VNEX-TS-004-S", size: "S", colorEs: "Rojo / Azul", colorEn: "Red / Blue", colorHex: "#dc2626", stock: 7 },
+      { id: "v-004-m", sku: "VNEX-TS-004-M", size: "M", colorEs: "Rojo / Azul", colorEn: "Red / Blue", colorHex: "#dc2626", stock: 15 },
+      { id: "v-004-l", sku: "VNEX-TS-004-L", size: "L", colorEs: "Rojo / Azul", colorEn: "Red / Blue", colorHex: "#dc2626", stock: 11 },
+      { id: "v-004-xl", sku: "VNEX-TS-004-XL", size: "XL", colorEs: "Rojo / Azul", colorEn: "Red / Blue", colorHex: "#dc2626", stock: 5 },
+    ],
+  },
+];
