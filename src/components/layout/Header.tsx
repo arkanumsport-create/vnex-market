@@ -146,14 +146,16 @@ export function Header({
     <>
       {/* Top Luxury Announcement Bar */}
       <div className="bg-[#151513] border-b border-white/10 text-[11px] tracking-wider text-[#f3f0e9]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 min-h-[40px] py-1.5 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-1.5 flex flex-wrap items-center justify-between gap-2">
           {/* Left Location */}
           <a
             href="#ubicacion"
-            className="flex items-center gap-2 text-xs text-[#d4cfc4] hover:text-[#38bdf8] transition"
+            className="flex items-center gap-1.5 text-[10px] sm:text-xs text-[#d4cfc4] hover:text-[#38bdf8] transition min-w-0"
           >
             <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0" />
-            <span>{locale === "es" ? STORE_CONFIG.locationEs : STORE_CONFIG.locationEn}</span>
+            <span className="truncate max-w-[260px] sm:max-w-none">
+              {locale === "es" ? STORE_CONFIG.shortLocationEs : STORE_CONFIG.shortLocationEn}
+            </span>
           </a>
 
           {/* Center Promo */}
@@ -163,28 +165,30 @@ export function Header({
           </div>
 
           {/* Right Contact + WhatsApp Icon + Language */}
-          <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+          <div className="flex items-center gap-2 sm:gap-4 ml-auto">
             <a
               href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white hover:text-[#38bdf8] font-bold transition whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 text-white hover:text-[#38bdf8] font-bold transition whitespace-nowrap"
               title="WhatsApp Oficial VNex Market"
             >
               <WhatsAppIcon className="w-3.5 h-3.5" />
-              <span className="tracking-wide text-xs">{STORE_CONFIG.whatsappDisplay}</span>
+              <span className="tracking-wide text-[11px] sm:text-xs">
+                {STORE_CONFIG.whatsappDisplay}
+              </span>
             </a>
 
             <button
               onClick={toggleShowVes}
-              className="px-2.5 py-1 rounded border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37]/10 text-[10px] font-bold tracking-widest uppercase transition cursor-pointer"
+              className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37]/10 text-[10px] font-bold tracking-widest uppercase transition cursor-pointer"
             >
               {showVes ? `Bs. (${vesRate})` : "$ USD"}
             </button>
 
             <button
               onClick={() => setLocale(locale === "es" ? "en" : "es")}
-              className="px-2.5 py-1 rounded border border-[#38bdf8]/50 text-[#38bdf8] hover:bg-[#38bdf8]/15 text-[10px] font-bold tracking-widest uppercase transition cursor-pointer"
+              className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded border border-[#38bdf8]/50 text-[#38bdf8] hover:bg-[#38bdf8]/15 text-[10px] font-bold tracking-widest uppercase transition cursor-pointer"
             >
               {locale === "es" ? "EN" : "ES"}
             </button>
@@ -193,108 +197,133 @@ export function Header({
       </div>
 
       {/* Sticky Main Header */}
-      <header className="sticky top-0 z-30 bg-[#10100f]/92 backdrop-blur-md border-b border-white/12">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 min-h-[82px] flex items-center justify-between relative">
-          {/* Left: MENÚ Trigger with Sky-Blue Oval Pill Frame */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-xs font-bold tracking-[0.18em] uppercase transition cursor-pointer ${
-                isSidebarOpen
-                  ? "border-2 border-[#38bdf8] bg-[#38bdf8]/20 text-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.35)]"
-                  : "border border-[#38bdf8]/60 bg-[#38bdf8]/10 text-[#38bdf8] hover:bg-[#38bdf8]/20 hover:border-[#38bdf8] shadow-[0_0_14px_rgba(56,189,248,0.2)]"
-              }`}
-            >
-              <Menu className="w-4 h-4 text-[#38bdf8]" />
-              <span>{t.menuButton}</span>
-            </button>
+      <header className="sticky top-0 z-30 bg-[#10100f]/94 backdrop-blur-md border-b border-white/12">
+        <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 lg:py-0 lg:min-h-[82px] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 relative">
+          {/* Row 1 (Mobile) / Main Row (Desktop) */}
+          <div className="w-full flex items-center justify-between gap-2">
+            {/* Left: MENÚ Trigger with Sky-Blue Oval Pill Frame */}
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className={`inline-flex items-center gap-1.5 sm:gap-2.5 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full text-[10px] sm:text-xs font-bold tracking-[0.14em] sm:tracking-[0.18em] uppercase transition cursor-pointer ${
+                  isSidebarOpen
+                    ? "border-2 border-[#38bdf8] bg-[#38bdf8]/20 text-[#38bdf8] shadow-[0_0_20px_rgba(56,189,248,0.35)]"
+                    : "border border-[#38bdf8]/60 bg-[#38bdf8]/10 text-[#38bdf8] hover:bg-[#38bdf8]/20 hover:border-[#38bdf8] shadow-[0_0_14px_rgba(56,189,248,0.2)]"
+                }`}
+              >
+                <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#38bdf8]" />
+                <span>{t.menuButton}</span>
+              </button>
 
-            <a
-              href="#fotoset"
-              onClick={() => setActiveMenuKey("fotoset")}
-              className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase transition ${
-                activeMenuKey === "fotoset"
-                  ? "border border-[#38bdf8] bg-[#38bdf8]/15 text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.25)]"
-                  : "text-[#d4cfc4] hover:text-[#38bdf8]"
-              }`}
+              <a
+                href="#fotoset"
+                onClick={() => setActiveMenuKey("fotoset")}
+                className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase transition ${
+                  activeMenuKey === "fotoset"
+                    ? "border border-[#38bdf8] bg-[#38bdf8]/15 text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.25)]"
+                    : "text-[#d4cfc4] hover:text-[#38bdf8]"
+                }`}
+              >
+                <Camera className="w-3.5 h-3.5 text-[#38bdf8]" />
+                <span>{t.navLookbook}</span>
+              </a>
+            </div>
+
+            {/* Center: 3D Rotating Coin Logo + Luxury Wordmark */}
+            <Link
+              href="/"
+              className="flex items-center gap-2 sm:gap-3.5 group lg:absolute lg:left-1/2 lg:-translate-x-1/2 min-w-0"
             >
-              <Camera className="w-3.5 h-3.5 text-[#38bdf8]" />
-              <span>{t.navLookbook}</span>
-            </a>
+              <div className="coin-stage">
+                <div className="coin-inner">
+                  <div className="coin-face">
+                    <img
+                      src={assetUrl("/logo/vnex-logo.jpg")}
+                      alt="VNEX Market 3D Logo"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="coin-face coin-face-back">
+                    <img
+                      src={assetUrl("/logo/vnex-logo.jpg")}
+                      alt="VNEX Market 3D Logo Back"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-left min-w-0">
+                <div className="text-[15px] sm:text-[26px] font-bold tracking-[0.08em] sm:tracking-[0.12em] leading-none flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+                  <span className="wordmark-stroke-blue">VNEX</span>
+                  <span className="wordmark-stroke-white">MARKET</span>
+                </div>
+                <small className="block text-[6.5px] sm:text-[9px] tracking-[0.18em] sm:tracking-[0.32em] uppercase text-[#99968e] mt-1 truncate">
+                  {locale === "es" ? STORE_CONFIG.subtitleEs : STORE_CONFIG.subtitleEn}
+                </small>
+              </div>
+            </Link>
+
+            {/* Right: Desktop DELIVERY + PWA + Search + Bag (Mobile shows Search + Bag here, DELIVERY + PWA neatly in Row 2) */}
+            <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+              <div className="hidden lg:flex items-center gap-2.5">
+                <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
+
+                <button
+                  onClick={() => setPwaModalOpen(true)}
+                  title={
+                    locale === "es"
+                      ? "Instalar Aplicación Web (PWA)"
+                      : "Install Web Application (PWA)"
+                  }
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-[11px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_16px_rgba(56,189,248,0.28)] transition cursor-pointer whitespace-nowrap"
+                >
+                  <PwaBadgeIcon className="w-3.5 h-3.5" />
+                  <span>PWA</span>
+                </button>
+              </div>
+
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="p-1.5 sm:p-2 text-[#f3f0e9] hover:text-[#38bdf8] transition cursor-pointer"
+                aria-label="Buscar"
+              >
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+
+              <button
+                onClick={() => setCartOpen(true)}
+                className="relative p-1.5 sm:p-2 text-[#f3f0e9] hover:text-[#d4af37] transition cursor-pointer"
+                aria-label="Carrito"
+              >
+                <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#d4af37] text-[#111] text-[9px] font-extrabold flex items-center justify-center">
+                  {totalItems}
+                </span>
+              </button>
+            </div>
           </div>
 
-          {/* Center: 3D Rotating Coin Logo + Luxury Wordmark */}
-          <Link
-            href="/"
-            className="flex items-center gap-3.5 group lg:absolute lg:left-1/2 lg:-translate-x-1/2"
-          >
-            <div className="coin-stage">
-              <div className="coin-inner">
-                <div className="coin-face">
-                  <img
-                    src={assetUrl("/logo/vnex-logo.jpg")}
-                    alt="VNEX Market 3D Logo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="coin-face coin-face-back">
-                  <img
-                    src={assetUrl("/logo/vnex-logo.jpg")}
-                    alt="VNEX Market 3D Logo Back"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
+          {/* Mobile Row 2: Centered DELIVERY + PWA + Fotoset Pills (Prevents any horizontal overflow!) */}
+          <div className="flex lg:hidden flex-wrap items-center justify-center gap-2 pt-1.5 border-t border-white/10">
+            <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} size="sm" />
 
-            <div className="text-left">
-              <div className="text-xl sm:text-[27px] font-bold tracking-[0.12em] leading-none flex items-center gap-2">
-                <span className="wordmark-stroke-blue">VNEX</span>
-                <span className="wordmark-stroke-white">MARKET</span>
-              </div>
-              <small className="block text-[8px] sm:text-[9px] tracking-[0.32em] uppercase text-[#99968e] mt-1">
-                {locale === "es" ? STORE_CONFIG.subtitleEs : STORE_CONFIG.subtitleEn}
-              </small>
-            </div>
-          </Link>
-
-          {/* Right: DELIVERY (Red Letters / Blue Oval) + PWA Icon Badge + Search & Bag */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* DELIVERY Button: Red Letters + Blue Oval right next to PWA */}
-            <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
-
-            {/* PWA Icon Button in Header */}
             <button
               onClick={() => setPwaModalOpen(true)}
-              title={
-                locale === "es"
-                  ? "Instalar Aplicación Web (PWA)"
-                  : "Install Web Application (PWA)"
-              }
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-[11px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_16px_rgba(56,189,248,0.28)] transition cursor-pointer whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 text-[#38bdf8] text-[10px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_14px_rgba(56,189,248,0.25)] transition cursor-pointer whitespace-nowrap"
             >
               <PwaBadgeIcon className="w-3.5 h-3.5" />
               <span>PWA</span>
             </button>
 
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="p-2 text-[#f3f0e9] hover:text-[#38bdf8] transition cursor-pointer"
-              aria-label="Buscar"
+            <a
+              href="#fotoset"
+              onClick={() => setActiveMenuKey("fotoset")}
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-white/20 text-[#d4cfc4] hover:text-[#38bdf8] text-[10px] font-bold tracking-[0.12em] uppercase whitespace-nowrap"
             >
-              <Search className="w-5 h-5" />
-            </button>
-
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative p-2 text-[#f3f0e9] hover:text-[#d4af37] transition cursor-pointer"
-              aria-label="Carrito"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#d4af37] text-[#111] text-[9px] font-extrabold flex items-center justify-center">
-                {totalItems}
-              </span>
-            </button>
+              <Camera className="w-3 h-3 text-[#38bdf8]" />
+              <span>Fotoset</span>
+            </a>
           </div>
         </div>
       </header>

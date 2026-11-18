@@ -120,18 +120,18 @@ export default function HomePage() {
       <DeliveryModal />
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-clip">
         {/* =====================================================================
             1. CINEMATIC HERO SECTION (Reference Split Layout + Intro Shrink)
             ===================================================================== */}
-        <section className="max-w-[1260px] mx-auto px-4 sm:px-8 mt-8 sm:mt-12">
+        <section className="max-w-[1260px] mx-auto px-3 sm:px-8 mt-4 sm:mt-12">
           <div className="relative min-h-[580px] sm:min-h-[620px] bg-[#191916] border border-white/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
             {/* RIGHT / FULL-BLEED MODEL IMAGE CONTAINER (Starts full-width, then shrinks to right half) */}
             <div
               className={`transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden bg-[#191916] ${
                 introPhase === "expand"
-                  ? "absolute inset-0 z-20 scale-105"
-                  : "relative lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:left-[44%] h-[420px] lg:h-full z-10 scale-100"
+                  ? "absolute inset-0 z-20 sm:scale-105"
+                  : "relative lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:left-[44%] h-[360px] sm:h-[420px] lg:h-full z-10 scale-100"
               }`}
             >
               <img
@@ -160,11 +160,11 @@ export default function HomePage() {
               )}
 
               {/* Bottom Model Caption & Slide Switcher */}
-              <div className="absolute z-20 right-6 bottom-5 left-6 flex flex-wrap items-center justify-between gap-2 text-[10px] tracking-[0.16em] uppercase text-white/90">
-                <div className="flex items-center gap-2 bg-black/65 backdrop-blur-xs px-3 py-1.5 rounded-full border border-white/15">
-                  <span className="text-[#d4af37] font-bold">{currentHeroModel.indexLabel}</span>
-                  <span className="text-white/40">•</span>
-                  <span className="truncate max-w-[220px] sm:max-w-none">
+              <div className="absolute z-20 right-3 bottom-3 left-3 sm:right-6 sm:bottom-5 sm:left-6 flex flex-wrap items-center justify-between gap-2 text-[10px] tracking-[0.14em] uppercase text-white/90">
+                <div className="flex items-center gap-1.5 bg-black/65 backdrop-blur-xs px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/15 max-w-full">
+                  <span className="text-[#d4af37] font-bold shrink-0">{currentHeroModel.indexLabel}</span>
+                  <span className="text-white/40 shrink-0">•</span>
+                  <span className="truncate max-w-[165px] sm:max-w-none">
                     {locale === "es" ? currentHeroModel.titleEs : currentHeroModel.titleEn}
                   </span>
                 </div>
@@ -219,15 +219,15 @@ export default function HomePage() {
               </div>
 
               {/* Animated Store Title Letters (VNEX MARKET) */}
-              <div className="mt-4 flex flex-wrap items-center gap-x-1">
+              <div className="mt-4 flex flex-wrap items-center gap-x-0.5 sm:gap-x-1">
                 {storeNameChars.map((ch, idx) =>
                   ch === " " ? (
-                    <span key={idx} className="w-3 inline-block" />
+                    <span key={idx} className="w-2 sm:w-3 inline-block" />
                   ) : (
                     <span
                       key={`${introPhase}-${idx}`}
                       style={{ animationDelay: `${idx * 65}ms` }}
-                      className={`font-serif-luxury text-2xl sm:text-3xl font-extrabold tracking-[0.14em] inline-block animate-[letter-pop_0.55s_ease-out_both] ${
+                      className={`font-serif-luxury text-xl sm:text-3xl font-extrabold tracking-[0.1em] sm:tracking-[0.14em] inline-block animate-[letter-pop_0.55s_ease-out_both] ${
                         idx < 4 ? "text-[#38bdf8]" : "text-[#d4af37]"
                       }`}
                     >
@@ -238,7 +238,7 @@ export default function HomePage() {
               </div>
 
               {/* Slogan in Reference 3D Red/White Stroked Display Typography */}
-              <h1 className="hero-slogan-display text-3xl sm:text-4xl lg:text-[44px] mt-3 mb-4 max-w-[540px]">
+              <h1 className="hero-slogan-display text-[26px] sm:text-4xl lg:text-[44px] mt-3 mb-4 max-w-[540px] break-words">
                 {t.heroSlogan}
               </h1>
 

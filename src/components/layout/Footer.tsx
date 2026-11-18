@@ -137,7 +137,7 @@ export function Footer() {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#171715] hover:bg-[#1f1f1c] border border-[#25D366] text-white font-bold text-xs tracking-wider uppercase shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition whitespace-nowrap"
+        className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-40 inline-flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-3 rounded-full bg-[#171715]/95 hover:bg-[#1f1f1c] border border-[#25D366] text-white font-bold text-[11px] sm:text-xs tracking-wider uppercase shadow-[0_10px_30px_rgba(0,0,0,0.85)] transition whitespace-nowrap"
       >
         <WhatsAppIcon className="w-4 h-4" />
         <span>{STORE_CONFIG.whatsappDisplay}</span>
