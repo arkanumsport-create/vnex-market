@@ -27,6 +27,8 @@ export interface ProductVariant {
 
 export interface Product {
   id: string;
+  articleNumber: string; // "001" .. "027"
+  brand: string;
   sku: string;
   slug: string;
   categorySlug: string;
@@ -48,6 +50,8 @@ export interface Product {
 
 export interface CartItem {
   productId: string;
+  articleNumber: string;
+  brand: string;
   variantId: string;
   sku: string;
   slug: string;

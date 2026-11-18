@@ -75,7 +75,9 @@ export function CartDrawer() {
     const itemsLines = order.items
       .map(
         (i) =>
-          `• ${i.quantity}x ${locale === "es" ? i.nameEs : i.nameEn} (Talla ${i.size}) — $${(
+          `• *Art. №${i.articleNumber || "001"}* | *Marca:* ${i.brand || "VNex"} | ${
+            i.quantity
+          }x ${locale === "es" ? i.nameEs : i.nameEn} (Talla ${i.size}) — $${(
             i.unitPriceUsd * i.quantity
           ).toFixed(2)} USD`
       )
@@ -86,22 +88,22 @@ export function CartDrawer() {
 
     const text =
       locale === "es"
-        ? `¡Hola VNEX MARKET! He realizado el pedido *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
-            2
-          )} USD\n*Método de Pago:* ${pmLabel}\n*Cliente:* ${order.firstName} ${
+        ? `¡Hola VNex Market! 👋\nSoy *${order.firstName} ${
             order.lastName
-          }\n*Teléfono:* ${order.phone}\n*Ubicación:* ${order.ciudad}, Edo. ${
-            order.estado
-          }\n*Dirección:* ${order.direccion}${
+          }*.\nQuiero comprar el siguiente pedido (*${order.orderNumber}*):\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
+            2
+          )} USD\n*Método de Pago:* ${pmLabel}\n*Teléfono:* ${order.phone}\n*Ubicación:* ${
+            order.ciudad
+          }, Edo. ${order.estado}\n*Dirección:* ${order.direccion}${
             order.referencia ? ` (Ref: ${order.referencia})` : ""
           }`
-        : `Hello VNEX MARKET! I placed order *${order.orderNumber}*:\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
-            2
-          )} USD\n*Payment Method:* ${pmLabel}\n*Customer:* ${order.firstName} ${
+        : `Hello VNex Market! 👋\nMy name is *${order.firstName} ${
             order.lastName
-          }\n*Phone:* ${order.phone}\n*Location:* ${order.ciudad}, ${
-            order.estado
-          }\n*Address:* ${order.direccion}`;
+          }*.\nI want to buy the following order (*${order.orderNumber}*):\n\n${itemsLines}\n\n*Total:* $${order.totalUsd.toFixed(
+            2
+          )} USD\n*Payment Method:* ${pmLabel}\n*Phone:* ${order.phone}\n*Location:* ${
+            order.ciudad
+          }, ${order.estado}\n*Address:* ${order.direccion}`;
 
     return `https://wa.me/${STORE_CONFIG.whatsappClean}?text=${encodeURIComponent(text)}`;
   };

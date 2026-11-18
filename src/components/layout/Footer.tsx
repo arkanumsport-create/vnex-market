@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, Camera, CreditCard, ShieldCheck, Award } from "lucide-react";
+import { MapPin, CreditCard, ShieldCheck, Award } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
@@ -64,19 +64,6 @@ export function Footer() {
                 className="text-white hover:text-[#38bdf8] font-bold tracking-wide transition"
               >
                 WhatsApp: {STORE_CONFIG.whatsappDisplay}
-              </a>
-            </div>
-            <div className="flex items-center gap-2.5 text-xs text-[#d4cfc4]">
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 via-pink-600 to-purple-600 text-white shrink-0">
-                <Camera className="w-3 h-3" />
-              </span>
-              <a
-                href={STORE_CONFIG.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white font-medium transition"
-              >
-                Instagram: {STORE_CONFIG.instagramHandle}
               </a>
             </div>
           </div>

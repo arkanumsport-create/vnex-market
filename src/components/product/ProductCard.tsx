@@ -38,7 +38,7 @@ export function ProductCard({ product, onSelectProduct }: ProductCardProps) {
       {/* Editorial Image Button */}
       <div
         onClick={() => onSelectProduct(product)}
-        className="relative aspect-[0.82] w-full overflow-hidden bg-[#201f1c] border border-white/10 hover:border-[#d4af37]/60 transition cursor-pointer"
+        className="relative aspect-[0.82] w-full overflow-hidden bg-[#201f1c] border border-white/10 hover:border-[#38bdf8]/70 transition cursor-pointer"
       >
         <img
           src={currentImage}
@@ -47,8 +47,11 @@ export function ProductCard({ product, onSelectProduct }: ProductCardProps) {
           className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
         />
 
-        {/* Top Left Origin & Photo Count Badge */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5">
+        {/* Top Left Article Number & Turkish Origin Badge */}
+        <div className="absolute top-3 left-3 flex flex-wrap items-center gap-1.5">
+          <span className="px-2.5 py-0.5 bg-[#09152b]/90 backdrop-blur-xs border border-[#38bdf8] text-[10px] font-extrabold tracking-wider uppercase text-[#38bdf8] shadow">
+            Art. №{product.articleNumber}
+          </span>
           <span className="px-2 py-0.5 bg-black/75 backdrop-blur-xs border border-white/15 text-[9px] font-bold tracking-widest uppercase text-[#d4af37]">
             🇹🇷 TURQUÍA
           </span>
@@ -60,9 +63,9 @@ export function ProductCard({ product, onSelectProduct }: ProductCardProps) {
         </div>
 
         {/* Hover Zoom Prompt */}
-        <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/75 border border-[#38bdf8]/50 text-[#38bdf8] text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/80 border border-[#38bdf8]/60 text-[#38bdf8] text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <ZoomIn className="w-3 h-3" />
-          <span>{locale === "es" ? "Ampliar" : "Inspect"}</span>
+          <span>{locale === "es" ? "Ver Prenda" : "Open Item"}</span>
         </div>
 
         {/* Quick Prev/Next Arrows on Hover */}
@@ -89,9 +92,12 @@ export function ProductCard({ product, onSelectProduct }: ProductCardProps) {
       {/* Editorial Product Info Row */}
       <div className="flex items-start justify-between gap-3 pt-3.5">
         <div className="min-w-0">
-          <p className="text-[9px] tracking-[0.14em] uppercase text-[#99968e]">
-            {locale === "es" ? product.categoryNameEs : product.categoryNameEn}
-          </p>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-extrabold tracking-[0.14em] uppercase text-[#38bdf8]">
+              {product.brand}
+            </span>
+            <span className="text-[9px] text-[#99968e]">• Art. №{product.articleNumber}</span>
+          </div>
           <button
             onClick={() => onSelectProduct(product)}
             className="mt-1 font-serif-luxury text-[14px] sm:text-[15px] text-left text-[#f3f0e9] hover:text-[#d4af37] transition leading-snug line-clamp-2 cursor-pointer"
@@ -104,7 +110,7 @@ export function ProductCard({ product, onSelectProduct }: ProductCardProps) {
         </span>
       </div>
 
-      {/* Payment & Authenticity Pills (Reference Style) */}
+      {/* Payment & Authenticity Pills */}
       <div
         className="flex flex-wrap items-center gap-1.5 pt-2.5"
         aria-label="Métodos de pago disponibles"

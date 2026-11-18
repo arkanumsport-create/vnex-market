@@ -136,18 +136,6 @@ export function Header({
               <span className="tracking-wide text-xs">{STORE_CONFIG.whatsappDisplay}</span>
             </a>
 
-            <a
-              href={STORE_CONFIG.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 text-[#d4cfc4] hover:text-white transition"
-            >
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 via-pink-600 to-purple-600 text-white">
-                <Camera className="w-3 h-3" />
-              </span>
-              <span className="text-xs font-medium">{STORE_CONFIG.instagramHandle}</span>
-            </a>
-
             <button
               onClick={toggleShowVes}
               className="px-2.5 py-1 rounded border border-[#d4af37]/40 text-[#d4af37] hover:bg-[#d4af37]/10 text-[10px] font-bold tracking-widest uppercase transition cursor-pointer"

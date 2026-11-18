@@ -14,6 +14,9 @@ interface StoreState {
   vesRate: number;
   setVesRate: (rate: number) => void;
 
+  customerFullName: string;
+  setCustomerFullName: (name: string) => void;
+
   products: Product[];
   addProduct: (product: Product) => void;
   updateProductImage: (productId: string, imageUrl: string) => void;
@@ -31,20 +34,25 @@ interface StoreState {
   toggleFavorite: (productId: string) => void;
 
   orders: OrderRecord[];
-  createOrder: (order: Omit<OrderRecord, "id" | "orderNumber" | "createdAt" | "orderStatus" | "paymentStatus">) => OrderRecord;
+  createOrder: (
+    order: Omit<OrderRecord, "id" | "orderNumber" | "createdAt" | "orderStatus" | "paymentStatus">
+  ) => OrderRecord;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
   updatePaymentStatus: (orderId: string, status: PaymentStatus) => void;
 }
 
 export const useStore = create<StoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       locale: "es",
       setLocale: (locale) => set({ locale }),
       showVes: false,
       toggleShowVes: () => set((s) => ({ showVes: !s.showVes })),
       vesRate: STORE_CONFIG.manualVesRate,
       setVesRate: (vesRate) => set({ vesRate }),
+
+      customerFullName: "",
+      setCustomerFullName: (customerFullName) => set({ customerFullName }),
 
       products: INITIAL_PRODUCTS,
       addProduct: (product) =>
@@ -135,7 +143,7 @@ export const useStore = create<StoreState>()(
         })),
     }),
     {
-      name: "vnex-market-storage-v2",
+      name: "vnex-market-storage-v3",
     }
   )
 );

@@ -58,9 +58,12 @@ export default function AdminDashboardPage() {
     e.preventDefault();
     if (!newNameEs.trim()) return;
     const id = `prod-${Date.now()}`;
-    const skuBase = `VNEX-TS-${Math.floor(100 + Math.random() * 900)}`;
+    const nextNum = String(products.length + 1).padStart(3, "0");
+    const skuBase = `ART-${nextNum}`;
     const product: Product = {
       id,
+      articleNumber: nextNum,
+      brand: "VNex Exclusive",
       sku: skuBase,
       slug: `camiseta-${Date.now()}`,
       categorySlug: "camisetas",
