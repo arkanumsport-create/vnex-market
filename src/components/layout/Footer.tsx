@@ -6,13 +6,14 @@ import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { PwaBadgeIcon } from "./PwaInstallModal";
+import { DeliveryBadgeButton } from "./DeliveryModal";
 
 export function Footer() {
-  const { locale, setPwaModalOpen } = useStore();
+  const { locale, setPwaModalOpen, setDeliveryModalOpen } = useStore();
   const t = DICTIONARY[locale];
 
   return (
-    <footer className="bg-[#141412] text-[#99968e] border-t border-white/12 mt-24">
+    <footer className="bg-[#141412] text-[#99968e] border-t border-white/12 mt-20">
       <div className="max-w-[1260px] mx-auto px-4 sm:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Column 1: Luxury Brand & Turkish Origin */}
@@ -69,7 +70,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Payment Methods & PWA Web App Button */}
+          {/* Column 3: Payment Methods & Delivery */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-serif-luxury text-sm font-semibold uppercase tracking-[0.16em] text-[#f3f0e9] flex items-center gap-2">
               <CreditCard className="w-4 h-4 text-[#d4af37]" />
@@ -89,23 +90,26 @@ export function Footer() {
               <ShieldCheck className="w-4 h-4 text-[#38bdf8] shrink-0" />
               <span>
                 {locale === "es"
-                  ? "100% Nuevo con etiqueta y certificado"
-                  : "100% Brand new with tags & certificate"}
+                  ? "Envíos por Grupo ZOOM • Pago al Recibir (COD)"
+                  : "Grupo ZOOM Shipping • Cash on Delivery (COD)"}
               </span>
             </p>
           </div>
         </div>
 
-        {/* Bottom Bar with Blue Oval PWA Badge */}
+        {/* Bottom Bar with Blue Oval DELIVERY & Blue Oval PWA Badges */}
         <div className="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#99968e] gap-4">
           <p>
             © {new Date().getFullYear()} {STORE_CONFIG.name}. {t.rightsReserved}
           </p>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="text-[10px] tracking-widest uppercase text-[#d4af37]">
-              TURKISH FACTORY DIRECT • MARACAY, VENEZUELA
+              PLAZA LA SOLEDAD, CALLE 9 • MARACAY
             </span>
+
+            {/* Blue Oval + Red Letters DELIVERY Button */}
+            <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
 
             {/* Blue Oval Highlighted PWA Button at the Very Bottom of the Site */}
             <button

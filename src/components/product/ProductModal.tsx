@@ -14,11 +14,13 @@ import {
   ShieldCheck,
   Maximize2,
   User,
+  Truck,
 } from "lucide-react";
 import { PaymentMethodId, Product } from "@/types/store";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
+import { DeliveryBadgeButton } from "@/components/layout/DeliveryModal";
 
 interface ProductModalProps {
   product: Product | null;
@@ -33,12 +35,16 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     addToCart,
     customerFullName,
     setCustomerFullName,
+    setDeliveryModalOpen,
   } = useStore();
   const t = DICTIONARY[locale];
 
   const [selectedImageIdx, setSelectedImageIdx] = useState(0);
   const [selectedVariantId, setSelectedVariantId] = useState<string>("");
   const [selectedPayment, setSelectedPayment] = useState<PaymentMethodId>("zelle");
+  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<string>(
+    "Grupo ZOOM (Cobro en Destino COD / Pago al Recibir)"
+  );
   const [isLargePhotoOpen, setIsLargePhotoOpen] = useState(false);
   const [isLargeZoomed, setIsLargeZoomed] = useState(false);
   const [addedFeedback, setAddedFeedback] = useState(false);
@@ -99,8 +105,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
 
   const whatsappDirectLink = `https://wa.me/${STORE_CONFIG.whatsappClean}?text=${encodeURIComponent(
     locale === "es"
-      ? `¡Hola VNex Market! 👋\nSoy *${buyerName}*.\nQuiero comprar la siguiente camiseta:\n• *Art. №:* ${product.articleNumber}\n• *Marca:* ${product.brand}\n• *Modelo:* ${product.nameEs}\n• *Talla:* ${selectedVariant?.size}\n• *Color:* ${selectedVariant?.colorEs}\n• *Precio:* $${unitPrice.toFixed(2)} USD\n• *Método de Pago:* ${selectedPaymentLabel}\n• *Ubicación:* Maracay, Edo. Aragua`
-      : `Hello VNex Market! 👋\nMy name is *${buyerName}*.\nI want to buy the following T-shirt:\n• *Art. №:* ${product.articleNumber}\n• *Brand:* ${product.brand}\n• *Model:* ${product.nameEn}\n• *Size:* ${selectedVariant?.size}\n• *Color:* ${selectedVariant?.colorEn}\n• *Price:* $${unitPrice.toFixed(2)} USD\n• *Payment Method:* ${selectedPaymentLabel}\n• *Location:* Maracay, Aragua State`
+      ? `¡Hola VNex Market! 👋\nSoy *${buyerName}*.\nQuiero comprar la siguiente camiseta:\n• *Art. №:* ${product.articleNumber}\n• *Marca:* ${product.brand}\n• *Modelo:* ${product.nameEs}\n• *Talla:* ${selectedVariant?.size}\n• *Color:* ${selectedVariant?.colorEs}\n• *Precio:* $${unitPrice.toFixed(2)} USD\n• *Método de Pago:* ${selectedPaymentLabel}\n• *Envío / Delivery:* ${selectedDeliveryOption}\n• *Tienda:* Maracay, Plaza La Soledad, Calle 9`
+      : `Hello VNex Market! 👋\nMy name is *${buyerName}*.\nI want to buy the following T-shirt:\n• *Art. №:* ${product.articleNumber}\n• *Brand:* ${product.brand}\n• *Model:* ${product.nameEn}\n• *Size:* ${selectedVariant?.size}\n• *Color:* ${selectedVariant?.colorEn}\n• *Price:* $${unitPrice.toFixed(2)} USD\n• *Payment Method:* ${selectedPaymentLabel}\n• *Shipping / Delivery:* ${selectedDeliveryOption}\n• *Store:* Maracay, Plaza La Soledad, Street 9`
   )}`;
 
   return (
@@ -116,10 +122,10 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           role="dialog"
           aria-modal="true"
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-[940px] max-h-[94vh] flex flex-col overflow-hidden border border-[#38bdf8]/35 bg-[#171715] text-[#f3f0e9] shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise"
+          className="relative w-full max-w-[960px] max-h-[94vh] flex flex-col overflow-hidden border border-[#38bdf8]/35 bg-[#171715] text-[#f3f0e9] shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise"
         >
-          {/* DEDICATED TOP HEADER BAR (VNex Market in Blue + online store below + Non-Overlapping Close X) */}
-          <div className="flex items-center justify-between gap-4 px-5 sm:px-7 py-3.5 bg-[#0c1424] border-b border-[#38bdf8]/30 shrink-0">
+          {/* DEDICATED TOP HEADER BAR (VNex Market in Blue + online store below + DELIVERY button + Non-Overlapping Close X) */}
+          <div className="flex items-center justify-between gap-3 px-5 sm:px-7 py-3.5 bg-[#0c1424] border-b border-[#38bdf8]/30 shrink-0">
             <div className="flex items-center gap-3">
               <img
                 src={assetUrl("/logo/vnex-logo.jpg")}
@@ -136,8 +142,11 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/50 text-[#38bdf8] text-xs font-extrabold tracking-wider">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              {/* DELIVERY Button (Blue Oval + Red Letters) inside Product Modal */}
+              <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} size="sm" />
+
+              <span className="hidden md:inline-block px-3 py-1 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8]/50 text-[#38bdf8] text-xs font-extrabold tracking-wider">
                 Art. №{product.articleNumber} • {product.brand}
               </span>
 
@@ -238,9 +247,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               )}
             </div>
 
-            {/* Right Column: Article Number, Brand, Details, Turkish Certificate & Auto-Filled WhatsApp Form */}
+            {/* Right Column: Article Number, Brand, Details, Delivery Notice & Auto-Filled WhatsApp Form */}
             <div className="md:col-span-6 flex flex-col justify-between space-y-4">
-              <div className="space-y-3.5">
+              <div className="space-y-3">
                 {/* Brand & Article Pill Row */}
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="text-xs font-extrabold tracking-[0.16em] uppercase text-[#38bdf8]">
@@ -255,36 +264,48 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   {locale === "es" ? product.nameEs : product.nameEn}
                 </h2>
 
-                <p className="font-serif-luxury text-2xl text-[#d4af37]">{priceDisplay}</p>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-serif-luxury text-2xl text-[#d4af37]">{priceDisplay}</p>
+
+                  {/* Visible Delivery + COD Callout Button right inside Product Details */}
+                  <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} size="sm" />
+                </div>
 
                 <p className="text-xs text-[#99968e] leading-relaxed">
                   {locale === "es" ? product.descriptionEs : product.descriptionEn}
                 </p>
 
-                {/* Turkish Factory Direct Authenticity Block */}
+                {/* Turkish Factory + Grupo ZOOM COD Notice */}
                 <div className="p-3 bg-[#111622] border border-[#38bdf8]/35 rounded-xl space-y-1.5">
-                  <div className="flex items-center gap-2 text-[11px] font-bold text-[#38bdf8] uppercase tracking-wider">
-                    <Award className="w-4 h-4 shrink-0 text-[#d4af37]" />
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-[#38bdf8] uppercase tracking-wider">
+                    <Award className="w-3.5 h-3.5 shrink-0 text-[#d4af37]" />
                     <span>{t.turkeyBadgeTitle}</span>
                   </div>
-                  <p className="text-[11px] text-[#cbd5e1] leading-relaxed">
-                    {t.turkeyBadgeText}
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-1 text-[10px] text-[#d4af37] font-semibold">
+                  <div className="flex flex-wrap gap-1.5 pt-1 text-[10px] text-[#d4af37] font-semibold">
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10">
                       <Tag className="w-3 h-3" />{" "}
-                      {locale === "es" ? "Con Etiqueta Original" : "With Original Tag"}
+                      {locale === "es" ? "Con Etiqueta" : "With Tag"}
                     </span>
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 border border-white/10">
                       <ShieldCheck className="w-3 h-3" />{" "}
-                      {locale === "es" ? "Certificado de Calidad" : "Quality Certificate"}
+                      {locale === "es" ? "Certificado Turco" : "Turkish Certificate"}
                     </span>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryModalOpen(true)}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#38bdf8]/15 border border-[#38bdf8] text-[#ff1f32] font-extrabold cursor-pointer"
+                    >
+                      <Truck className="w-3 h-3" />{" "}
+                      {locale === "es"
+                        ? "Envío ZOOM / Pago al Recibir (COD)"
+                        : "ZOOM Shipping / COD"}
+                    </button>
                   </div>
                 </div>
 
                 {/* Size Selector */}
                 <div className="pt-1">
-                  <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-[#99968e] mb-2">
+                  <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-[#99968e] mb-1.5">
                     <span>{t.sizeLabel}</span>
                     <span className="text-[#d4af37] font-bold">{selectedVariant?.size}</span>
                   </div>
@@ -295,7 +316,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                         <button
                           key={v.id}
                           onClick={() => setSelectedVariantId(v.id)}
-                          className={`w-11 h-10 text-xs font-bold border transition cursor-pointer ${
+                          className={`w-11 h-9 text-xs font-bold border transition cursor-pointer ${
                             active
                               ? "border-[#38bdf8] text-[#38bdf8] bg-[#38bdf8]/15"
                               : "border-white/15 text-[#f3f0e9] hover:border-[#38bdf8] hover:text-[#38bdf8]"
@@ -308,22 +329,31 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   </div>
                 </div>
 
-                {/* Quick Customer Name & Payment Selector for Auto-Filled WhatsApp Form */}
-                <div className="p-3.5 rounded-xl bg-[#10100f] border border-white/15 space-y-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#38bdf8] flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5" />
-                    <span>
-                      {locale === "es"
-                        ? "Formulario Automático para Pedido por WhatsApp:"
-                        : "Automatic WhatsApp Order Form:"}
-                    </span>
-                  </p>
+                {/* Quick Customer Name, Payment & Delivery Selector for Auto-Filled WhatsApp Form */}
+                <div className="p-3.5 rounded-xl bg-[#10100f] border border-white/15 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#38bdf8] flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5" />
+                      <span>
+                        {locale === "es"
+                          ? "Formulario Rápido de Pedido:"
+                          : "Quick Order Form:"}
+                      </span>
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryModalOpen(true)}
+                      className="text-[10px] font-bold text-[#ff1f32] hover:underline uppercase cursor-pointer"
+                    >
+                      {locale === "es" ? "Ver Reglas Delivery →" : "Delivery Rules →"}
+                    </button>
+                  </div>
 
                   <div>
                     <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
                       {locale === "es"
-                        ? "Tu Nombre y Apellido (para el mensaje):"
-                        : "Your First & Last Name (for the message):"}
+                        ? "Tu Nombre y Apellido:"
+                        : "Your First & Last Name:"}
                     </label>
                     <input
                       type="text"
@@ -334,6 +364,45 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                       }
                       className="w-full px-3 py-2 rounded-lg bg-[#171715] border border-white/20 text-xs text-white placeholder-[#64748b] focus:outline-none focus:border-[#38bdf8]"
                     />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-[#99968e] mb-1">
+                      {locale === "es"
+                        ? "Envío / Delivery (Soporta Pago al Recibir COD):"
+                        : "Shipping / Delivery (Supports COD):"}
+                    </label>
+                    <select
+                      value={selectedDeliveryOption}
+                      onChange={(e) => setSelectedDeliveryOption(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg bg-[#171715] border border-[#38bdf8]/40 text-xs text-white focus:outline-none focus:border-[#38bdf8]"
+                    >
+                      <option value="Grupo ZOOM (Cobro en Destino COD / Pago al Recibir)">
+                        {locale === "es"
+                          ? "⭐ Grupo ZOOM — Rápido / Pago al Recibir (COD)"
+                          : "⭐ Grupo ZOOM — Express / Cash on Delivery (COD)"}
+                      </option>
+                      <option value="Delivery Local en Maracay (Pago al Recibir)">
+                        {locale === "es"
+                          ? "🛵 Delivery en Maracay (Pago en Efectivo USD al Recibir)"
+                          : "🛵 Local Delivery in Maracay (Pay Cash USD on Receipt)"}
+                      </option>
+                      <option value="Retiro en Tienda (Maracay, Plaza La Soledad, Calle 9)">
+                        {locale === "es"
+                          ? "📍 Retiro Personal — Maracay, Plaza La Soledad, Calle 9 (Gratis)"
+                          : "📍 Personal Pickup — Maracay, Plaza La Soledad, Street 9 (Free)"}
+                      </option>
+                      <option value="MRW Venezuela (Cobro en Destino COD)">
+                        {locale === "es"
+                          ? "📦 MRW Venezuela — Cobro en Destino (COD)"
+                          : "📦 MRW Venezuela — Cash on Delivery (COD)"}
+                      </option>
+                      <option value="TEALCA / DOMESA (Cobro en Destino COD)">
+                        {locale === "es"
+                          ? "📦 TEALCA / DOMESA — Cobro en Destino (COD)"
+                          : "📦 TEALCA / DOMESA — Cash on Delivery (COD)"}
+                      </option>
+                    </select>
                   </div>
 
                   <div>

@@ -20,6 +20,9 @@ interface StoreState {
   isPwaModalOpen: boolean;
   setPwaModalOpen: (open: boolean) => void;
 
+  isDeliveryModalOpen: boolean;
+  setDeliveryModalOpen: (open: boolean) => void;
+
   products: Product[];
   addProduct: (product: Product) => void;
   updateProductImage: (productId: string, imageUrl: string) => void;
@@ -59,6 +62,9 @@ export const useStore = create<StoreState>()(
 
       isPwaModalOpen: false,
       setPwaModalOpen: (isPwaModalOpen) => set({ isPwaModalOpen }),
+
+      isDeliveryModalOpen: false,
+      setDeliveryModalOpen: (isDeliveryModalOpen) => set({ isDeliveryModalOpen }),
 
       products: INITIAL_PRODUCTS,
       addProduct: (product) =>

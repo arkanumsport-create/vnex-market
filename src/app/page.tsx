@@ -16,6 +16,9 @@ import {
   ZoomIn,
   Factory,
   CheckCircle2,
+  MapPin,
+  Navigation,
+  Truck,
 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -23,6 +26,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductModal } from "@/components/product/ProductModal";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { PwaInstallModal } from "@/components/layout/PwaInstallModal";
+import { DeliveryModal, DeliveryBadgeButton } from "@/components/layout/DeliveryModal";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { useStore } from "@/stores/useStore";
 import {
@@ -35,7 +39,7 @@ import {
 import { Product } from "@/types/store";
 
 export default function HomePage() {
-  const { locale, products } = useStore();
+  const { locale, products, setDeliveryModalOpen } = useStore();
   const t = DICTIONARY[locale];
 
   // Hero Intro Animation State: "expand" (full model photo) -> "settled" (shrinks to right, reveals letters & description)
@@ -113,6 +117,7 @@ export default function HomePage() {
 
       <CartDrawer />
       <PwaInstallModal />
+      <DeliveryModal />
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
 
       <main className="flex-1">
@@ -535,15 +540,157 @@ export default function HomePage() {
                 <span>Maracay, Estado Aragua</span>
               </div>
 
-              <a
-                href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-black font-extrabold text-xs tracking-wider uppercase whitespace-nowrap shrink-0 transition"
-              >
-                <WhatsAppIcon className="w-4 h-4 shrink-0" withBadge={false} />
-                <span className="whitespace-nowrap">WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
+
+                <a
+                  href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-black font-extrabold text-xs tracking-wider uppercase whitespace-nowrap shrink-0 transition"
+                >
+                  <WhatsAppIcon className="w-4 h-4 shrink-0" withBadge={false} />
+                  <span className="whitespace-nowrap">WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =====================================================================
+            5. CÓMO ENCONTRARNOS / INTERACTIVE MAP SECTION (#ubicacion)
+            ===================================================================== */}
+        <section id="ubicacion" className="max-w-[1260px] mx-auto px-4 sm:px-8 pt-20">
+          <div className="p-6 sm:p-10 bg-[#171715] border border-[#38bdf8]/35 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#38bdf8] flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#ff1f32]" />
+                  <span>
+                    {locale === "es"
+                      ? "UBICACIÓN OFICIAL & RETIRO PERSONAL"
+                      : "OFFICIAL LOCATION & PERSONAL PICKUP"}
+                  </span>
+                </p>
+                <h2 className="font-serif-luxury text-2xl sm:text-4xl text-[#f3f0e9] mt-2">
+                  {locale === "es" ? "CÓMO ENCONTRARNOS" : "HOW TO FIND US"}
+                </h2>
+                <p className="text-xs sm:text-sm text-[#bdb9b0] mt-1">
+                  {locale === "es"
+                    ? "Visítanos o retira tu pedido en Maracay, Plaza La Soledad, Calle 9, Estado Aragua."
+                    : "Visit us or pick up your order in Maracay, Plaza La Soledad, Street 9, Aragua State."}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Plaza+La+Soledad+Calle+9+Maracay+Aragua+Venezuela"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#38bdf8] hover:bg-[#0ea5e9] text-[#08101f] font-extrabold text-[11px] tracking-wider uppercase transition"
+                >
+                  <Navigation className="w-3.5 h-3.5" />
+                  <span>{locale === "es" ? "Abrir en Google Maps" : "Open in Google Maps"}</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left: Location & Grupo ZOOM COD Details Card */}
+              <div className="lg:col-span-5 p-6 bg-[#10100f] border border-white/12 flex flex-col justify-between space-y-6">
+                <div className="space-y-4">
+                  {/* VNex Market Pin Header */}
+                  <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+                    <img
+                      src={assetUrl("/logo/vnex-logo.jpg")}
+                      alt="VNex Market"
+                      className="w-12 h-12 rounded-full object-cover border-2 border-[#38bdf8]"
+                    />
+                    <div>
+                      <span className="block font-serif-luxury text-lg font-extrabold text-[#38bdf8] leading-none">
+                        VNex Market
+                      </span>
+                      <span className="block text-[10px] uppercase tracking-[0.26em] text-[#cbd5e1] mt-1">
+                        online store • Maracay
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Exact Address */}
+                  <div className="space-y-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#d4af37] block">
+                      {locale === "es" ? "DIRECCIÓN EXACTA:" : "EXACT ADDRESS:"}
+                    </span>
+                    <p className="text-sm font-bold text-white flex items-start gap-2">
+                      <MapPin className="w-4 h-4 text-[#ff1f32] shrink-0 mt-0.5" />
+                      <span>
+                        {locale === "es"
+                          ? "Maracay, Urbanización La Soledad, Plaza La Soledad, Calle 9, Estado Aragua, Venezuela"
+                          : "Maracay, Urbanización La Soledad, Plaza La Soledad, Street 9, Aragua State, Venezuela"}
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Grupo ZOOM & COD Summary */}
+                  <div className="p-4 rounded-xl bg-[#0c1424] border border-[#38bdf8]/40 space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-extrabold text-[#38bdf8] uppercase">
+                      <Truck className="w-4 h-4 text-[#ff1f32]" />
+                      <span>
+                        {locale === "es"
+                          ? "Grupo ZOOM • MRW • Tealca (COD)"
+                          : "Grupo ZOOM • MRW • Tealca (COD)"}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#cbd5e1] leading-relaxed">
+                      {locale === "es"
+                        ? "Envíos rápidos a toda Venezuela (Caracas, Valencia, Barquisimeto y más) con modalidad Cobro en Destino (COD): compras tu prenda y pagas el envío al recibir."
+                        : "Fast nationwide shipping across Venezuela with Cash on Delivery (COD): buy your garment and pay the shipping fee upon receipt."}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 space-y-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setDeliveryModalOpen(true)}
+                    className="w-full py-3 px-4 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8]/25 text-[#ff1f32] font-extrabold text-xs tracking-[0.16em] uppercase flex items-center justify-center gap-2 transition cursor-pointer"
+                  >
+                    <Truck className="w-4 h-4 text-[#ff1f32]" />
+                    <span>
+                      {locale === "es"
+                        ? "VER REGLAS DE DELIVERY Y GRUPO ZOOM"
+                        : "VIEW DELIVERY & GRUPO ZOOM RULES"}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Right: Interactive Map with VNex Market Marker Pin */}
+              <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[430px] bg-[#0c1424] border-2 border-[#38bdf8]/50 overflow-hidden">
+                <iframe
+                  title="VNex Market — Plaza La Soledad, Calle 9, Maracay"
+                  src={`https://maps.google.com/maps?q=10.2586,-67.5912+(VNex+Market+-+Plaza+La+Soledad+Calle+9+Maracay)&t=&z=16&ie=UTF8&iwloc=B&output=embed&hl=${locale}`}
+                  className="w-full h-full min-h-[380px] sm:min-h-[430px] border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+
+                {/* Prominent Custom VNex Market Marker Badge Overlay */}
+                <div className="absolute top-3 left-3 z-10 pointer-events-none flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#0c1424]/95 border-2 border-[#38bdf8] shadow-[0_10px_30px_rgba(0,0,0,0.85)]">
+                  <span className="w-3 h-3 rounded-full bg-[#ff1f32] animate-ping" />
+                  <div>
+                    <span className="block font-serif-luxury text-sm font-extrabold text-[#38bdf8] leading-none">
+                      📍 VNex Market
+                    </span>
+                    <span className="block text-[10px] font-bold text-white mt-0.5">
+                      {locale === "es"
+                        ? "Maracay • Plaza La Soledad, Calle 9"
+                        : "Maracay • Plaza La Soledad, Street 9"}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

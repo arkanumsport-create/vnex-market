@@ -11,11 +11,14 @@ import {
   Camera,
   Sparkles,
   Smartphone,
+  Truck,
+  MapPin,
 } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { PwaBadgeIcon } from "./PwaInstallModal";
+import { DeliveryBadgeButton } from "./DeliveryModal";
 
 interface HeaderProps {
   activeSection?: string;
@@ -40,6 +43,7 @@ export function Header({
     cart,
     setCartOpen,
     setPwaModalOpen,
+    setDeliveryModalOpen,
   } = useStore();
   const t = DICTIONARY[locale];
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -102,6 +106,12 @@ export function Header({
       labelEn: "TURKISH FACTORY • ABOUT US",
       section: "turquia",
     },
+    {
+      key: "ubicacion",
+      labelEs: "MAPA • PLAZA LA SOLEDAD CALLE 9",
+      labelEn: "MAP • PLAZA LA SOLEDAD STREET 9",
+      section: "ubicacion",
+    },
   ];
 
   const handleMenuClick = (item: (typeof sidebarItems)[number]) => {
@@ -124,16 +134,27 @@ export function Header({
     }, 180);
   };
 
+  const handleDeliveryMenuClick = () => {
+    setActiveMenuKey("delivery-modal");
+    setTimeout(() => {
+      setIsSidebarOpen(false);
+      setDeliveryModalOpen(true);
+    }, 180);
+  };
+
   return (
     <>
       {/* Top Luxury Announcement Bar */}
       <div className="bg-[#151513] border-b border-white/10 text-[11px] tracking-wider text-[#f3f0e9]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 min-h-[40px] py-1.5 flex flex-wrap items-center justify-between gap-3">
           {/* Left Location */}
-          <div className="flex items-center gap-2 text-xs text-[#d4cfc4]">
-            <span className="text-[#d4af37] text-base leading-none">◦</span>
+          <a
+            href="#ubicacion"
+            className="flex items-center gap-2 text-xs text-[#d4cfc4] hover:text-[#38bdf8] transition"
+          >
+            <MapPin className="w-3.5 h-3.5 text-[#d4af37] shrink-0" />
             <span>{locale === "es" ? STORE_CONFIG.locationEs : STORE_CONFIG.locationEn}</span>
-          </div>
+          </a>
 
           {/* Center Promo */}
           <div className="hidden xl:flex items-center gap-2 text-[#d4af37] font-semibold tracking-[0.14em] text-[10px] uppercase">
@@ -191,7 +212,7 @@ export function Header({
             <a
               href="#fotoset"
               onClick={() => setActiveMenuKey("fotoset")}
-              className={`hidden lg:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase transition ${
+              className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-semibold tracking-[0.14em] uppercase transition ${
                 activeMenuKey === "fotoset"
                   ? "border border-[#38bdf8] bg-[#38bdf8]/15 text-[#38bdf8] shadow-[0_0_15px_rgba(56,189,248,0.25)]"
                   : "text-[#d4cfc4] hover:text-[#38bdf8]"
@@ -237,8 +258,11 @@ export function Header({
             </div>
           </Link>
 
-          {/* Right: PWA Icon Badge, Turkish Quality, Search & Bag */}
-          <div className="flex items-center gap-2.5 sm:gap-3.5">
+          {/* Right: DELIVERY (Red Letters / Blue Oval) + PWA Icon Badge + Search & Bag */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* DELIVERY Button: Red Letters + Blue Oval right next to PWA */}
+            <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} />
+
             {/* PWA Icon Button in Header */}
             <button
               onClick={() => setPwaModalOpen(true)}
@@ -247,23 +271,11 @@ export function Header({
                   ? "Instalar Aplicación Web (PWA)"
                   : "Install Web Application (PWA)"
               }
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-[10px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_16px_rgba(56,189,248,0.28)] transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-[11px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_16px_rgba(56,189,248,0.28)] transition cursor-pointer whitespace-nowrap"
             >
               <PwaBadgeIcon className="w-3.5 h-3.5" />
               <span>PWA</span>
             </button>
-
-            <a
-              href="#turquia"
-              onClick={() => setActiveMenuKey("turquia")}
-              className={`hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-[0.12em] uppercase transition ${
-                activeMenuKey === "turquia"
-                  ? "border border-[#38bdf8] bg-[#38bdf8]/15 text-[#38bdf8]"
-                  : "border border-white/15 text-[#d4af37] hover:border-[#38bdf8] hover:text-[#38bdf8]"
-              }`}
-            >
-              <span>🇹🇷 {locale === "es" ? "Calidad Turquía" : "Turkish Quality"}</span>
-            </a>
 
             <button
               onClick={() => setIsSidebarOpen(true)}
@@ -361,8 +373,29 @@ export function Header({
                   );
                 })}
 
-                {/* Dedicated Web Application (PWA) Button inside Sidebar Menu */}
-                <div className="pt-3 mt-2 border-t border-[#38bdf8]/20">
+                {/* Dedicated DELIVERY & PWA Buttons inside Sidebar Menu */}
+                <div className="pt-3 mt-2 border-t border-[#38bdf8]/20 space-y-2">
+                  {/* DELIVERY Button in Sidebar */}
+                  <button
+                    onClick={handleDeliveryMenuClick}
+                    className={`sidebar-menu-item ${
+                      activeMenuKey === "delivery-modal" ? "active-oval" : ""
+                    } border-2 border-[#38bdf8] bg-[#38bdf8]/12`}
+                  >
+                    <span className="inline-flex items-center gap-2.5 text-[#ff1f32] font-extrabold">
+                      <Truck className="w-4 h-4 text-[#ff1f32] shrink-0" />
+                      <span>
+                        {locale === "es"
+                          ? "ENVÍOS & DELIVERY (ZOOM / COD)"
+                          : "SHIPPING & DELIVERY (ZOOM / COD)"}
+                      </span>
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full border border-[#38bdf8] bg-[#38bdf8]/20 text-[#ff1f32] text-[10px] font-extrabold tracking-widest uppercase">
+                      DELIVERY
+                    </span>
+                  </button>
+
+                  {/* WEB APPLICATION (PWA) Button in Sidebar */}
                   <button
                     onClick={handleWebAppClick}
                     className={`sidebar-menu-item ${
@@ -401,17 +434,6 @@ export function Header({
                     {locale === "es" ? STORE_CONFIG.locationEs : STORE_CONFIG.locationEn}
                   </p>
                 </div>
-              </div>
-
-              <div className="p-3.5 rounded-2xl bg-[#070d19]/90 border border-[#38bdf8]/25 space-y-2">
-                <p className="text-[11px] text-[#38bdf8] font-bold uppercase tracking-wider">
-                  🇹🇷 {locale === "es" ? "Importación Directa de Turquía" : "Direct Turkish Import"}
-                </p>
-                <p className="text-[11px] text-[#cbd5e1] leading-relaxed">
-                  {locale === "es"
-                    ? "100% Nuevo con etiqueta original y certificado de calidad. Precio único: $20.00 USD."
-                    : "100% Brand new with original tags and quality certificate. Flat price: $20.00 USD."}
-                </p>
               </div>
 
               <a
