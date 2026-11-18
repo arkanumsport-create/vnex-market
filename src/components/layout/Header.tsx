@@ -10,10 +10,12 @@ import {
   ArrowRight,
   Camera,
   Sparkles,
+  Smartphone,
 } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { PwaBadgeIcon } from "./PwaInstallModal";
 
 interface HeaderProps {
   activeSection?: string;
@@ -29,7 +31,16 @@ export function Header({
   searchQuery = "",
   onSearchChange,
 }: HeaderProps) {
-  const { locale, setLocale, showVes, toggleShowVes, vesRate, cart, setCartOpen } = useStore();
+  const {
+    locale,
+    setLocale,
+    showVes,
+    toggleShowVes,
+    vesRate,
+    cart,
+    setCartOpen,
+    setPwaModalOpen,
+  } = useStore();
   const t = DICTIONARY[locale];
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -105,6 +116,14 @@ export function Header({
     }, 220);
   };
 
+  const handleWebAppClick = () => {
+    setActiveMenuKey("webapp-pwa");
+    setTimeout(() => {
+      setIsSidebarOpen(false);
+      setPwaModalOpen(true);
+    }, 180);
+  };
+
   return (
     <>
       {/* Top Luxury Announcement Bar */}
@@ -128,7 +147,7 @@ export function Header({
               href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white hover:text-[#38bdf8] font-bold transition"
+              className="inline-flex items-center gap-2 text-white hover:text-[#38bdf8] font-bold transition whitespace-nowrap"
               title="WhatsApp Oficial VNex Market"
             >
               <WhatsAppIcon className="w-3.5 h-3.5" />
@@ -156,7 +175,7 @@ export function Header({
       <header className="sticky top-0 z-30 bg-[#10100f]/92 backdrop-blur-md border-b border-white/12">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 min-h-[82px] flex items-center justify-between relative">
           {/* Left: MENÚ Trigger with Sky-Blue Oval Pill Frame */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <button
               onClick={() => setIsSidebarOpen(true)}
               className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-xs font-bold tracking-[0.18em] uppercase transition cursor-pointer ${
@@ -218,8 +237,22 @@ export function Header({
             </div>
           </Link>
 
-          {/* Right: Actions & Bag */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          {/* Right: PWA Icon Badge, Turkish Quality, Search & Bag */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            {/* PWA Icon Button in Header */}
+            <button
+              onClick={() => setPwaModalOpen(true)}
+              title={
+                locale === "es"
+                  ? "Instalar Aplicación Web (PWA)"
+                  : "Install Web Application (PWA)"
+              }
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-[10px] font-extrabold tracking-[0.14em] uppercase shadow-[0_0_16px_rgba(56,189,248,0.28)] transition cursor-pointer"
+            >
+              <PwaBadgeIcon className="w-3.5 h-3.5" />
+              <span>PWA</span>
+            </button>
+
             <a
               href="#turquia"
               onClick={() => setActiveMenuKey("turquia")}
@@ -309,7 +342,9 @@ export function Header({
                 {sidebarItems.map((item) => {
                   const isActive =
                     activeMenuKey === item.key ||
-                    (item.category && item.category === selectedCategory && activeMenuKey === item.key);
+                    (item.category &&
+                      item.category === selectedCategory &&
+                      activeMenuKey === item.key);
                   return (
                     <button
                       key={item.key}
@@ -325,6 +360,28 @@ export function Header({
                     </button>
                   );
                 })}
+
+                {/* Dedicated Web Application (PWA) Button inside Sidebar Menu */}
+                <div className="pt-3 mt-2 border-t border-[#38bdf8]/20">
+                  <button
+                    onClick={handleWebAppClick}
+                    className={`sidebar-menu-item ${
+                      activeMenuKey === "webapp-pwa" ? "active-oval" : ""
+                    } border-[#38bdf8]/50 bg-[#38bdf8]/10 text-[#38bdf8]`}
+                  >
+                    <span className="inline-flex items-center gap-2.5">
+                      <Smartphone className="w-4 h-4 text-[#38bdf8] shrink-0" />
+                      <span>
+                        {locale === "es"
+                          ? "APLICACIÓN WEB (PWA)"
+                          : "WEB APPLICATION (PWA)"}
+                      </span>
+                    </span>
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#38bdf8] text-[#08101f] text-[10px] font-extrabold tracking-widest uppercase">
+                      PWA
+                    </span>
+                  </button>
+                </div>
               </nav>
             </div>
 
@@ -361,7 +418,7 @@ export function Header({
                 href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 w-full py-3 px-4 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366] text-white font-bold text-xs transition shadow-[0_0_16px_rgba(37,211,102,0.2)]"
+                className="flex items-center justify-center gap-2.5 w-full py-3 px-4 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 border border-[#25D366] text-white font-bold text-xs transition shadow-[0_0_16px_rgba(37,211,102,0.2)] whitespace-nowrap"
               >
                 <WhatsAppIcon className="w-4 h-4" />
                 <span>WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>

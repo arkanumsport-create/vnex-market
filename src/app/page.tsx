@@ -22,6 +22,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductModal } from "@/components/product/ProductModal";
 import { CartDrawer } from "@/components/cart/CartDrawer";
+import { PwaInstallModal } from "@/components/layout/PwaInstallModal";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { useStore } from "@/stores/useStore";
 import {
@@ -111,6 +112,7 @@ export default function HomePage() {
       />
 
       <CartDrawer />
+      <PwaInstallModal />
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
 
       <main className="flex-1">

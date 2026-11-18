@@ -5,9 +5,10 @@ import { MapPin, CreditCard, ShieldCheck, Award } from "lucide-react";
 import { useStore } from "@/stores/useStore";
 import { DICTIONARY, STORE_CONFIG, assetUrl } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { PwaBadgeIcon } from "./PwaInstallModal";
 
 export function Footer() {
-  const { locale } = useStore();
+  const { locale, setPwaModalOpen } = useStore();
   const t = DICTIONARY[locale];
 
   return (
@@ -61,14 +62,14 @@ export function Footer() {
                 href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#38bdf8] font-bold tracking-wide transition"
+                className="text-white hover:text-[#38bdf8] font-bold tracking-wide transition whitespace-nowrap"
               >
                 WhatsApp: {STORE_CONFIG.whatsappDisplay}
               </a>
             </div>
           </div>
 
-          {/* Column 3: Payment Methods */}
+          {/* Column 3: Payment Methods & PWA Web App Button */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-serif-luxury text-sm font-semibold uppercase tracking-[0.16em] text-[#f3f0e9] flex items-center gap-2">
               <CreditCard className="w-4 h-4 text-[#d4af37]" />
@@ -95,13 +96,31 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Bottom Bar with Blue Oval PWA Badge */}
         <div className="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#99968e] gap-4">
           <p>
             © {new Date().getFullYear()} {STORE_CONFIG.name}. {t.rightsReserved}
           </p>
-          <p className="text-[10px] tracking-widest uppercase text-[#d4af37]">
-            TURKISH FACTORY DIRECT • MARACAY, VENEZUELA
-          </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="text-[10px] tracking-widest uppercase text-[#d4af37]">
+              TURKISH FACTORY DIRECT • MARACAY, VENEZUELA
+            </span>
+
+            {/* Blue Oval Highlighted PWA Button at the Very Bottom of the Site */}
+            <button
+              onClick={() => setPwaModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full border-2 border-[#38bdf8] bg-[#38bdf8]/15 hover:bg-[#38bdf8] text-[#38bdf8] hover:text-[#08101f] text-xs font-extrabold tracking-[0.2em] uppercase shadow-[0_0_20px_rgba(56,189,248,0.35)] transition cursor-pointer"
+              title={
+                locale === "es"
+                  ? "Abrir / Instalar Aplicación Web (PWA)"
+                  : "Open / Install Web Application (PWA)"
+              }
+            >
+              <PwaBadgeIcon className="w-4 h-4" />
+              <span>PWA</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -114,7 +133,7 @@ export function Footer() {
         )}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#171715] hover:bg-[#1f1f1c] border border-[#25D366] text-white font-bold text-xs tracking-wider uppercase shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#171715] hover:bg-[#1f1f1c] border border-[#25D366] text-white font-bold text-xs tracking-wider uppercase shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition whitespace-nowrap"
       >
         <WhatsAppIcon className="w-4 h-4" />
         <span>{STORE_CONFIG.whatsappDisplay}</span>

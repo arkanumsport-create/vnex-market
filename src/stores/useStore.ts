@@ -17,6 +17,9 @@ interface StoreState {
   customerFullName: string;
   setCustomerFullName: (name: string) => void;
 
+  isPwaModalOpen: boolean;
+  setPwaModalOpen: (open: boolean) => void;
+
   products: Product[];
   addProduct: (product: Product) => void;
   updateProductImage: (productId: string, imageUrl: string) => void;
@@ -53,6 +56,9 @@ export const useStore = create<StoreState>()(
 
       customerFullName: "",
       setCustomerFullName: (customerFullName) => set({ customerFullName }),
+
+      isPwaModalOpen: false,
+      setPwaModalOpen: (isPwaModalOpen) => set({ isPwaModalOpen }),
 
       products: INITIAL_PRODUCTS,
       addProduct: (product) =>
@@ -144,6 +150,16 @@ export const useStore = create<StoreState>()(
     }),
     {
       name: "vnex-market-storage-v4",
+      partialize: (state) => ({
+        locale: state.locale,
+        showVes: state.showVes,
+        vesRate: state.vesRate,
+        customerFullName: state.customerFullName,
+        products: state.products,
+        cart: state.cart,
+        favorites: state.favorites,
+        orders: state.orders,
+      }),
     }
   )
 );
