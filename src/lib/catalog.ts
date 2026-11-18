@@ -722,11 +722,15 @@ export const INITIAL_PRODUCTS: Product[] = [
     nameEs: "Franela Balenciaga Logo Relieve — Rosa Pastel",
     nameEn: "Balenciaga Raised Logo T-Shirt — Pastel Pink",
     descriptionEs:
-      "Camiseta Balenciaga en tono rosa con letras frontales en relieve texturizado. Algodón turco peinado 100% nuevo con etiqueta.",
+      "Camiseta Balenciaga en tono rosa con letras frontales en relieve texturizado y logo BB amarillo en la espalda. Algodón turco peinado 100% nuevo con etiqueta.",
     descriptionEn:
-      "Pastel pink Balenciaga T-shirt with textured raised front lettering. 100% brand new combed Turkish cotton with tags.",
+      "Pastel pink Balenciaga T-shirt with textured raised front lettering and yellow back BB print. 100% brand new combed Turkish cotton with tags.",
     priceUsd: 20.0,
-    images: ["/products/franela-29-1.jpg"],
+    images: [
+      "/products/franela-29-1.jpg",
+      "/products/franela-29-2.jpg",
+      "/products/franela-29-3.jpg",
+    ],
     isFeatured: false,
     isNew: true,
     variants: createVariants("ART-029", "Rosa", "Pink", "#f472b6"),
@@ -743,11 +747,15 @@ export const INITIAL_PRODUCTS: Product[] = [
     nameEs: "Franela Balenciaga Logo Relieve — Verde Lima Neón",
     nameEn: "Balenciaga Raised Logo T-Shirt — Neon Lime",
     descriptionEs:
-      "Camiseta Balenciaga en color verde lima neón con tipografía frontal en contraste. Importación directa de fábrica en Turquía.",
+      "Camiseta Balenciaga en color verde lima neón con tipografía frontal en contraste y logo BB en la espalda. Importación directa de fábrica en Turquía.",
     descriptionEn:
-      "Neon lime green Balenciaga T-shirt with contrasting front typography. Direct Turkish factory import.",
+      "Neon lime green Balenciaga T-shirt with contrasting front typography and back BB logo. Direct Turkish factory import.",
     priceUsd: 20.0,
-    images: ["/products/franela-30-1.jpg"],
+    images: [
+      "/products/franela-30-1.jpg",
+      "/products/franela-30-2.jpg",
+      "/products/franela-30-3.jpg",
+    ],
     isFeatured: false,
     isNew: true,
     variants: createVariants("ART-030", "Verde Lima", "Lime Green", "#a3e635"),
@@ -764,11 +772,19 @@ export const INITIAL_PRODUCTS: Product[] = [
     nameEs: "Franela Off-White x KAWS Companion XX — Negra",
     nameEn: "Off-White x KAWS Companion XX T-Shirt — Black",
     descriptionEs:
-      "Edición coleccionista negra con gráfico central Companion, detalles azules en mangas y sellos XX inferiores.",
+      "Edición coleccionista negra con gráfico central Companion, flechas traseras KAWS a todo color, detalles azules en mangas y sellos XX inferiores.",
     descriptionEn:
-      "Collector edition black T-shirt featuring center Companion graphic, blue sleeve accents, and lower XX emblems.",
+      "Collector edition black T-shirt featuring center Companion graphic, full-color back KAWS arrows, blue sleeve accents, and lower XX emblems.",
     priceUsd: 20.0,
-    images: ["/products/franela-31-1.jpg"],
+    images: [
+      "/products/franela-31-1.jpg",
+      "/products/franela-31-2.jpg",
+      "/products/franela-31-3.jpg",
+      "/products/franela-31-4.jpg",
+      "/products/franela-31-5.jpg",
+      "/products/franela-31-6.jpg",
+      "/products/franela-31-7.jpg",
+    ],
     isFeatured: true,
     isNew: true,
     variants: createVariants("ART-031", "Negro / Azul", "Black / Blue", "#111827"),

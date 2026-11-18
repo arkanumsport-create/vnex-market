@@ -149,7 +149,7 @@ export const useStore = create<StoreState>()(
         })),
     }),
     {
-      name: "vnex-market-storage-v4",
+      name: "vnex-market-storage-v5",
       partialize: (state) => ({
         locale: state.locale,
         showVes: state.showVes,
