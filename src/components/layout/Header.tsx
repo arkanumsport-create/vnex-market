@@ -9,7 +9,6 @@ import {
   Search,
   ArrowRight,
   Camera,
-  ShieldCheck,
   Sparkles,
 } from "lucide-react";
 import { useStore } from "@/stores/useStore";
@@ -232,15 +231,6 @@ export function Header({
             >
               <span>🇹🇷 {locale === "es" ? "Calidad Turquía" : "Turkish Quality"}</span>
             </a>
-
-            <Link
-              href="/admin"
-              className="hidden sm:inline-flex items-center gap-1 text-[11px] uppercase tracking-wider text-[#99968e] hover:text-[#d4af37] transition"
-              title="Admin Panel"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-              <span className="hidden xl:inline">Admin</span>
-            </Link>
 
             <button
               onClick={() => setIsSidebarOpen(true)}

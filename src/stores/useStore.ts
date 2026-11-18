@@ -143,7 +143,7 @@ export const useStore = create<StoreState>()(
         })),
     }),
     {
-      name: "vnex-market-storage-v3",
+      name: "vnex-market-storage-v4",
     }
   )
 );

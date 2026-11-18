@@ -537,10 +537,10 @@ export default function HomePage() {
                 href={`https://wa.me/${STORE_CONFIG.whatsappClean}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-black font-extrabold text-xs tracking-wider uppercase transition"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-black font-extrabold text-xs tracking-wider uppercase whitespace-nowrap shrink-0 transition"
               >
-                <WhatsAppIcon className="w-4 h-4" withBadge={false} />
-                <span>WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>
+                <WhatsAppIcon className="w-4 h-4 shrink-0" withBadge={false} />
+                <span className="whitespace-nowrap">WhatsApp: {STORE_CONFIG.whatsappDisplay}</span>
               </a>
             </div>
           </div>
