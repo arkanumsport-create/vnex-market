@@ -301,3 +301,64 @@ body {
     padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 20px), 28px) !important;
   }
 }
+
+/* =========================================================================
+   Festive Christmas & New Year Soft Twinkle Animations (Gentle on Eyes)
+   ========================================================================= */
+@keyframes twinkle-gentle {
+  0%, 100% {
+    opacity: 0.42;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.98;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes twinkle-modal-soft {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes starburst-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes snow-fall-soft {
+  0% {
+    transform: translateY(-10px) translateX(0px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  85% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(580px) translateX(18px);
+    opacity: 0;
+  }
+}
+
+.animate-twinkle-gentle {
+  animation: twinkle-gentle 3.4s ease-in-out infinite;
+}
+
+.animate-twinkle-modal-soft {
+  animation: twinkle-modal-soft 4.2s ease-in-out infinite;
+}
+
+.animate-starburst-slow {
+  animation: starburst-rotate 28s linear infinite;
+}

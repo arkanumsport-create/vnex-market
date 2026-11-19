@@ -27,6 +27,11 @@ import { ProductModal } from "@/components/product/ProductModal";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { PwaInstallModal } from "@/components/layout/PwaInstallModal";
 import { DeliveryModal, DeliveryBadgeButton } from "@/components/layout/DeliveryModal";
+import {
+  HeroChristmasFrame,
+  HolidayPromoStarburst,
+  HolidayPromoModal,
+} from "@/components/layout/FestiveHeroDecor";
 import { WhatsAppIcon } from "@/components/layout/WhatsAppIcon";
 import { useStore } from "@/stores/useStore";
 import {
@@ -51,8 +56,9 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // Lookbook Lightbox State
+  // Lookbook Lightbox State & Holiday 3+1 Promo Modal State
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const [isHolidayPromoOpen, setIsHolidayPromoOpen] = useState(false);
 
   // Trigger Hero Intro Shrink after 1.35s on mount
   useEffect(() => {
@@ -118,14 +124,23 @@ export default function HomePage() {
       <CartDrawer />
       <PwaInstallModal />
       <DeliveryModal />
+      <HolidayPromoModal
+        isOpen={isHolidayPromoOpen}
+        onClose={() => setIsHolidayPromoOpen(false)}
+      />
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
 
       <main className="flex-1 w-full overflow-x-clip">
         {/* =====================================================================
-            1. CINEMATIC HERO SECTION (Reference Split Layout + Intro Shrink)
+            1. CINEMATIC HERO SECTION (Reference Split Layout + Festive Pine & Garland Frame)
             ===================================================================== */}
         <section className="max-w-[1260px] mx-auto px-3 sm:px-8 mt-4 sm:mt-12">
-          <div className="relative min-h-[580px] sm:min-h-[620px] bg-[#191916] border border-white/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
+          <div className="relative min-h-[580px] sm:min-h-[620px] bg-[#191916] border border-[#d4af37]/30 overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-center">
+            {/* Festive Snow-Dusted Pine Branches & Twinkling Garland Frame */}
+            <HeroChristmasFrame />
+
+            {/* 36-Angle Starburst Polygon (>30 Angles) Christmas & New Year 3+1 Promo Badge */}
+            <HolidayPromoStarburst onClick={() => setIsHolidayPromoOpen(true)} />
             {/* RIGHT / FULL-BLEED MODEL IMAGE CONTAINER (Starts full-width, then shrinks to right half) */}
             <div
               className={`transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-hidden bg-[#191916] ${
