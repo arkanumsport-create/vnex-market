@@ -76,14 +76,14 @@ export function PwaInstallModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[70] grid place-items-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+      className="pwa-modal-safe fixed inset-0 z-[85] flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
       onClick={() => setPwaModalOpen(false)}
     >
       <div
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-lg border border-[#38bdf8]/45 bg-[#121622] text-[#f3f0e9] rounded-3xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise"
+        className="pwa-modal-card w-full max-w-lg max-h-[90dvh] overflow-y-auto border border-[#38bdf8]/45 bg-[#121622] text-[#f3f0e9] rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise"
       >
         {/* Top Bar with VNex Market in Blue + online store + Close X */}
         <div className="flex items-center justify-between gap-4 px-6 py-4 bg-[#0b1220] border-b border-[#38bdf8]/30">

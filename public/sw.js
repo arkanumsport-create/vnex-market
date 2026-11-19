@@ -1,4 +1,4 @@
-const CACHE_NAME = "vnex-market-pwa-v1";
+const CACHE_NAME = "vnex-market-pwa-v2";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();

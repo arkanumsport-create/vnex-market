@@ -112,7 +112,7 @@ export function CartDrawer() {
     <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-xs">
       <div className="w-full max-w-md bg-[#171715] text-[#f3f0e9] border-l border-white/15 h-full shadow-2xl flex flex-col justify-between overflow-hidden">
         {/* Drawer Header */}
-        <div className="p-5 border-b border-white/12 flex items-center justify-between">
+        <div className="pwa-safe-top px-5 pb-4 pt-5 border-b border-white/12 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             {step === "checkout" && (
               <button

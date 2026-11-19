@@ -144,8 +144,11 @@ export function Header({
 
   return (
     <>
+      {/* Status Bar Shield for Mobile PWA Standalone Mode (iPhone Dynamic Island / Notch) */}
+      <div className="pwa-status-shield" aria-hidden="true" />
+
       {/* Top Luxury Announcement Bar */}
-      <div className="bg-[#151513] border-b border-white/10 text-[11px] tracking-wider text-[#f3f0e9]">
+      <div className="pwa-safe-top bg-[#151513] border-b border-white/10 text-[11px] tracking-wider text-[#f3f0e9]">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-1.5 flex flex-wrap items-center justify-between gap-2">
           {/* Left Location */}
           <a
@@ -197,7 +200,7 @@ export function Header({
       </div>
 
       {/* Sticky Main Header */}
-      <header className="sticky top-0 z-30 bg-[#10100f]/94 backdrop-blur-md border-b border-white/12">
+      <header className="sticky pwa-sticky-header z-30 bg-[#10100f]/94 backdrop-blur-md border-b border-white/12">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-8 py-2.5 lg:py-0 lg:min-h-[82px] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 relative">
           {/* Row 1 (Mobile) / Main Row (Desktop) */}
           <div className="w-full flex items-center justify-between gap-2">
@@ -338,7 +341,7 @@ export function Header({
           />
 
           {/* Sidebar Panel — Deep Midnight Blue & Luxury Gold/Sky-Blue Palette */}
-          <aside className="relative z-10 w-full max-w-[430px] h-full flex flex-col justify-between p-7 sm:p-8 bg-gradient-to-b from-[#0b1528] via-[#0e1b33] to-[#09101d] border-r border-[#38bdf8]/30 shadow-[0_0_50px_rgba(0,0,0,0.85)] animate-drawer-left overflow-y-auto">
+          <aside className="pwa-drawer-safe relative z-10 w-full max-w-[430px] h-full flex flex-col justify-between px-6 sm:px-8 bg-gradient-to-b from-[#0b1528] via-[#0e1b33] to-[#09101d] border-r border-[#38bdf8]/30 shadow-[0_0_50px_rgba(0,0,0,0.85)] animate-drawer-left overflow-y-auto">
             <div>
               {/* Drawer Header */}
               <div className="flex items-start justify-between pb-5 border-b border-[#38bdf8]/20">

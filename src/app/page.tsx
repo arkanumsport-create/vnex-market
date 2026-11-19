@@ -700,14 +700,19 @@ export default function HomePage() {
       {lightboxIdx !== null && (
         <div
           onClick={() => setLightboxIdx(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          className="pwa-lightbox-safe fixed inset-0 z-[80] bg-black/92 backdrop-blur-md flex flex-col items-center justify-between px-4"
         >
-          <button
-            onClick={() => setLightboxIdx(null)}
-            className="absolute top-5 right-5 w-11 h-11 rounded-full bg-white text-black hover:bg-[#ff1f32] hover:text-white grid place-items-center transition cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="w-full max-w-3xl flex items-center justify-between gap-3">
+            <span className="font-serif-luxury text-sm font-extrabold text-[#38bdf8]">
+              VNex Market • Lookbook
+            </span>
+            <button
+              onClick={() => setLightboxIdx(null)}
+              className="w-10 h-10 rounded-full bg-white text-black hover:bg-[#ff1f32] hover:text-white grid place-items-center transition cursor-pointer shrink-0"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
 
           <button
             onClick={(e) => {

@@ -46,14 +46,14 @@ export function DeliveryModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[75] grid place-items-center p-3 sm:p-6 bg-black/82 backdrop-blur-sm overflow-y-auto"
+      className="pwa-modal-safe fixed inset-0 z-[90] flex items-center justify-center px-3 sm:px-6 bg-black/82 backdrop-blur-sm overflow-y-auto"
       onClick={() => setDeliveryModalOpen(false)}
     >
       <div
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-3xl max-h-[92vh] flex flex-col border border-[#38bdf8]/45 bg-[#121622] text-[#f3f0e9] rounded-3xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.94)] animate-modal-rise"
+        className="pwa-modal-card w-full max-w-3xl max-h-[90dvh] flex flex-col border border-[#38bdf8]/45 bg-[#121622] text-[#f3f0e9] rounded-3xl overflow-hidden shadow-[0_25px_70px_rgba(0,0,0,0.94)] animate-modal-rise"
       >
         {/* Top Header Bar: VNex Market in Blue + online store + Close X */}
         <div className="flex items-center justify-between gap-4 px-6 py-4 bg-[#0b1220] border-b border-[#38bdf8]/30 shrink-0">

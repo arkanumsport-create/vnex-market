@@ -227,3 +227,77 @@ body {
 .animate-hero-slide {
   animation: hero-photo-zoom 0.85s ease-out both;
 }
+
+/* =========================================================================
+   PWA Mobile Standalone Safe-Area Handling (iPhone Dynamic Island / Notch)
+   Applies safe spacing ONLY in mobile PWA standalone app mode so desktop
+   and standard mobile browsers remain compact and unchanged.
+   ========================================================================= */
+.pwa-status-shield {
+  display: none;
+}
+
+.pwa-safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pwa-sticky-header {
+  top: 0;
+}
+
+.pwa-modal-safe {
+  padding-top: max(calc(env(safe-area-inset-top, 0px) + 12px), 12px);
+  padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 12px), 12px);
+}
+
+.pwa-lightbox-safe {
+  padding-top: max(calc(env(safe-area-inset-top, 0px) + 16px), 16px);
+  padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 16px), 16px);
+}
+
+.pwa-drawer-safe {
+  padding-top: max(calc(env(safe-area-inset-top, 0px) + 24px), 24px);
+  padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 24px), 24px);
+}
+
+@media (display-mode: standalone) and (max-width: 1024px) {
+  .pwa-status-shield {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: max(env(safe-area-inset-top, 0px), 52px);
+    background: #0b0d12;
+    z-index: 95;
+    pointer-events: none;
+  }
+
+  .pwa-safe-top {
+    padding-top: max(calc(env(safe-area-inset-top, 0px) + 10px), 58px) !important;
+  }
+
+  .pwa-sticky-header {
+    top: max(env(safe-area-inset-top, 0px), 52px) !important;
+  }
+
+  .pwa-modal-safe {
+    padding-top: max(calc(env(safe-area-inset-top, 0px) + 14px), 64px) !important;
+    padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 16px), 20px) !important;
+    align-items: flex-start !important;
+  }
+
+  .pwa-modal-card {
+    max-height: calc(100dvh - max(env(safe-area-inset-top, 0px), 56px) - 28px) !important;
+  }
+
+  .pwa-lightbox-safe {
+    padding-top: max(calc(env(safe-area-inset-top, 0px) + 14px), 64px) !important;
+    padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 16px), 24px) !important;
+  }
+
+  .pwa-drawer-safe {
+    padding-top: max(calc(env(safe-area-inset-top, 0px) + 20px), 68px) !important;
+    padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 20px), 28px) !important;
+  }
+}

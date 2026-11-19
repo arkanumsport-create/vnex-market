@@ -115,34 +115,34 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           1. PRODUCT DETAIL MODAL WINDOW
           ===================================================================== */}
       <div
-        className="fixed inset-0 z-50 grid place-items-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm overflow-y-auto"
+        className="pwa-modal-safe fixed inset-0 z-50 flex items-center justify-center px-3 sm:px-6 bg-black/82 backdrop-blur-sm overflow-y-auto"
         onClick={onClose}
       >
         <div
           role="dialog"
           aria-modal="true"
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-[960px] max-h-[94vh] flex flex-col overflow-hidden border border-[#38bdf8]/35 bg-[#171715] text-[#f3f0e9] shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise"
+          className="pwa-modal-card relative w-full max-w-[960px] max-h-[90dvh] flex flex-col overflow-hidden border border-[#38bdf8]/35 bg-[#171715] text-[#f3f0e9] shadow-[0_25px_70px_rgba(0,0,0,0.92)] animate-modal-rise rounded-2xl sm:rounded-none"
         >
           {/* DEDICATED TOP HEADER BAR (VNex Market in Blue + online store below + DELIVERY button + Non-Overlapping Close X) */}
-          <div className="flex items-center justify-between gap-3 px-5 sm:px-7 py-3.5 bg-[#0c1424] border-b border-[#38bdf8]/30 shrink-0">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between gap-2 px-3.5 sm:px-7 py-3 bg-[#0c1424] border-b border-[#38bdf8]/30 shrink-0">
+            <div className="flex items-center gap-2.5 min-w-0">
               <img
                 src={assetUrl("/logo/vnex-logo.jpg")}
                 alt="VNex Market"
-                className="w-10 h-10 rounded-full object-cover border border-[#38bdf8]"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-[#38bdf8] shrink-0"
               />
-              <div>
-                <span className="block font-serif-luxury text-lg sm:text-xl font-extrabold text-[#38bdf8] tracking-wider leading-none">
+              <div className="min-w-0">
+                <span className="block font-serif-luxury text-[15px] sm:text-xl font-extrabold text-[#38bdf8] tracking-wide leading-none whitespace-nowrap">
                   VNex Market
                 </span>
-                <span className="block text-[10px] uppercase tracking-[0.28em] text-[#cbd5e1] mt-1">
+                <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.28em] text-[#cbd5e1] mt-1 whitespace-nowrap">
                   online store
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {/* DELIVERY Button (Blue Oval + Red Letters) inside Product Modal */}
               <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} size="sm" />
 
@@ -153,9 +153,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               <button
                 onClick={onClose}
                 aria-label="Cerrar ventana"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#ff1f32] text-white border border-white/25 hover:border-[#ff1f32] grid place-items-center transition cursor-pointer shrink-0"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-[#ff1f32] text-white border border-white/30 hover:border-[#ff1f32] grid place-items-center transition cursor-pointer shrink-0"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
@@ -470,54 +470,73 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           ===================================================================== */}
       {isLargePhotoOpen && (
         <div
-          className="fixed inset-0 z-[80] bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6"
+          className="pwa-lightbox-safe fixed inset-0 z-[80] bg-black/95 backdrop-blur-md flex flex-col justify-between px-3 sm:px-6"
           onClick={() => {
             setIsLargePhotoOpen(false);
             setIsLargeZoomed(false);
           }}
         >
-          {/* Top Bar in Full-Screen Viewer */}
+          {/* Top Bar in Full-Screen Viewer (Model + Article + DELIVERY + Zoom + Close X, safely below status bar) */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-w-6xl w-full mx-auto flex items-center justify-between gap-4 px-5 py-3 rounded-2xl bg-[#0c1424]/90 border border-[#38bdf8]/40"
+            className="max-w-6xl w-full mx-auto flex flex-col gap-2 px-3.5 sm:px-5 py-3 rounded-2xl bg-[#0c1424]/95 border border-[#38bdf8]/45 shadow-xl shrink-0"
           >
-            <div>
-              <span className="block font-serif-luxury text-lg font-extrabold text-[#38bdf8] leading-none">
-                VNex Market
-              </span>
-              <span className="block text-[10px] uppercase tracking-[0.28em] text-[#cbd5e1] mt-1">
-                online store • Art. №{product.articleNumber} ({product.brand})
-              </span>
+            {/* Row 1: VNex Market + DELIVERY + Zoom + Close */}
+            <div className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <span className="block font-serif-luxury text-sm sm:text-lg font-extrabold text-[#38bdf8] leading-none whitespace-nowrap">
+                  VNex Market
+                </span>
+                <span className="block text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-[#cbd5e1] mt-0.5 whitespace-nowrap">
+                  online store
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+                <DeliveryBadgeButton onClick={() => setDeliveryModalOpen(true)} size="sm" />
+
+                <button
+                  onClick={() => setIsLargeZoomed(!isLargeZoomed)}
+                  className="px-2.5 sm:px-3.5 py-1.5 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8] text-[#38bdf8] text-[10px] sm:text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1 cursor-pointer whitespace-nowrap"
+                >
+                  {isLargeZoomed ? (
+                    <>
+                      <ZoomOut className="w-3.5 h-3.5" />
+                      <span>1x</span>
+                    </>
+                  ) : (
+                    <>
+                      <ZoomIn className="w-3.5 h-3.5" />
+                      <span>2x</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setIsLargePhotoOpen(false);
+                    setIsLargeZoomed(false);
+                  }}
+                  aria-label="Cerrar foto grande"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-[#ff1f32] text-white border border-white/30 grid place-items-center transition cursor-pointer shrink-0"
+                >
+                  <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <button
-                onClick={() => setIsLargeZoomed(!isLargeZoomed)}
-                className="px-3.5 py-2 rounded-full bg-[#38bdf8]/15 border border-[#38bdf8] text-[#38bdf8] text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 cursor-pointer"
-              >
-                {isLargeZoomed ? (
-                  <>
-                    <ZoomOut className="w-4 h-4" />
-                    <span>1x</span>
-                  </>
-                ) : (
-                  <>
-                    <ZoomIn className="w-4 h-4" />
-                    <span>2x Zoom</span>
-                  </>
-                )}
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsLargePhotoOpen(false);
-                  setIsLargeZoomed(false);
-                }}
-                aria-label="Cerrar foto grande"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#ff1f32] text-white border border-white/25 grid place-items-center transition cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
+            {/* Row 2: Article Number + Brand + Model Name */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-1.5 border-t border-white/10 text-[11px] sm:text-xs">
+              <span className="px-2 py-0.5 rounded bg-[#38bdf8]/15 border border-[#38bdf8]/40 text-[#38bdf8] font-extrabold tracking-wider">
+                Art. №{product.articleNumber}
+              </span>
+              <span className="font-bold text-[#d4af37] uppercase tracking-wider">
+                {product.brand}
+              </span>
+              <span className="text-white/40">•</span>
+              <span className="text-[#f3f0e9] truncate max-w-full">
+                {locale === "es" ? product.nameEs : product.nameEn}
+              </span>
             </div>
           </div>
 
